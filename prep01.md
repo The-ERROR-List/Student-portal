@@ -5,7 +5,7 @@
 * islam Attar.
 * nour Al satari.
 * Mujahed Abuarqob.
-* Bushraa Al Dawdyeh.
+* Bushra Al Dawdyeh.
 
 * **What are the key strengths of each person on the team?**
 
