@@ -1,4 +1,11 @@
 # Student-portal
+### team members:
+* ibrahim Alaqoul.
+* walid Al refai.
+* islam Attar.
+* nour Al satari.
+* Mujahed Abuarqob.
+* Bushraa Al Dawdyeh.
 
 * **What are the key strengths of each person on the team?**
 
