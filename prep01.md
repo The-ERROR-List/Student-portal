@@ -1,4 +1,4 @@
-# Student-portal
+# prep1-portal
 ### team members:
 * ibrahim Alaqoul.
 * walid Al refai.
