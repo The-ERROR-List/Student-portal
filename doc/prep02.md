@@ -9,7 +9,7 @@
 * Bushra Al Dawdyeh.
 
 ## Brainstorming Ideas
-![](./assets/brainstorm.png)
+![](../assets/brainstorm.png)
 
 ## Create your Pitch
  **Name of Project:** Student Portal
