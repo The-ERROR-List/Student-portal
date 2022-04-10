@@ -41,7 +41,14 @@ classModel.belongsTo(TeacherModel ,{foreignKey:'teacherId',targetKey:'id' })
 StudentModel.hasMany(classModel,{ through : 'student_class'})
 classModel.belongsToMany(StudentModel,{ through : 'student_class'})
 
+courseModel.hasMany(classModel,{ foreignKey:'courseId', sourceKey : 'id' })
+classModel.belongsTo(courseModel ,{foreignKey:'courseId',targetKey:'id' })
 
+StudentModel.hasMany(courseModel,{ through : 'student_course'})
+courseModel.belongsToMany(StudentModel,{ through : 'student_course'})
+
+TeacherModel.hasMany(courseModel,{ through : 'teacher_course'})
+courseModel.belongsToMany(TeacherModel,{ through : 'teacher_course'})
 
 
 
