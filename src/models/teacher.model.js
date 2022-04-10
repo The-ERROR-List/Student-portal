@@ -1,7 +1,7 @@
 'use strict';
 const Teacher = (sequelize, DataTypes) => sequelize.define('teacher', {
     id: {
-        type: DataTypes.INTERGER,
+        type: DataTypes.INTEGER,
         primaryKey: true,
     },
     userId: {

@@ -29,10 +29,10 @@ let ClassModel = classModel(sequelize, DataTypes);
 let UserModel = userModel(sequelize, DataTypes);
 // relations between tables
 
-userModel.hasOne(StudentModel, { foreignKey: 'userId' });
+UserModel.hasOne(StudentModel, { foreignKey: 'userId' });
 StudentModel.belongsTo(UserModel, { foreignKey: 'userId' });
 
-userModel.hasOne(TeacherModel, { foreignKey: 'userId' });
+UserModel.hasOne(TeacherModel, { foreignKey: 'userId' });
 TeacherModel.belongsTo(UserModel, { foreignKey: 'userId' });
 
 TeacherModel.hasMany(classModel,{ foreignKey:'teacherId', sourceKey : 'id' })
