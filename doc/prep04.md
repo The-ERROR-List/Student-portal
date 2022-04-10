@@ -2,7 +2,7 @@
 
 ## User Stories
 
-These are the stories for our approved project [Stories](https://trello.com/invite/b/SEjEBv6I/16bc899f12c31ac9347d6690e556a151/student)
+These are the stories for our approved project [Stories](https://trello.com/invite/b/SEjEBv6I/9f8b070a0cc37ee49941456c37d47c73/student)
 
 ## Software Requirements
 [Software Requirements](requirements.md)

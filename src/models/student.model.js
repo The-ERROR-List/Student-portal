@@ -1,35 +1,36 @@
-//classModel
 'use strict';
  const Student =  (sequelize,DataTypes) => sequelize.define('student',{
-    studentName :{
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+    },
+    userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    firstName :{
         type: DataTypes.STRING,
-        unique: true,
         allowNull: false,
 
     },
-    email:{
-        type: DataTypes.INTEGER,
-        unique: true,
-        allowNull: false, //foreign key 
-    },
-    password:{
-        len: [8,16],//lllllll
+    
+    lastName:{
         type: DataTypes.STRING,
         allowNull: false,
     },
-    role:{
-        type: DataTypes.ENUM('student'),
-        
+
+    gender : {
+        type : DataTypes.ENUM(['female','male']),
+        allowNull : false,
     },
-    actions: {
-        type: DataTypes.VIRTUAL,
-        get() {
-          const acl = {
-            student: ["read", "create", "update"],
-          };
-          return acl[this.role];
-        }
+    nationality : {
+        type : DataTypes.STRING
+    },
+    major : {
+        type : DataTypes.STRING,
+        allowNull : false,
     }
+  
  })
 
 module.exports = Student;
