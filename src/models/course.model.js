@@ -16,12 +16,14 @@
         allowNull: false, 
     },
     teacherId :{
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         allowNull: false, //foreign key   
     
     },
     studentId:{
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         allowNull: false, //foreign key
 
     },

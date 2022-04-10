@@ -1,7 +1,8 @@
 'use strict';
  const Class =  (sequelize,DataTypes) => sequelize.define('class',{
-    id: {
-        type: DataTypes.INTEGER,
+    id : {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
     },
     className :{
@@ -11,16 +12,21 @@
     },
     
     courseId :{
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         allowNull: false, //foreign key
     },
     teacherId :{
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+
         allowNull: false, //foreign key   
     
     },
     studentId:{
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+
         allowNull: false, //foreign key
 
     },

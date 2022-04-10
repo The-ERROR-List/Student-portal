@@ -1,11 +1,13 @@
 'use strict';
  const Student =  (sequelize,DataTypes) => sequelize.define('student',{
-    id: {
-        type: DataTypes.INTEGER,
+    id : {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
     },
     userId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         allowNull: false,
     },
     firstName :{
