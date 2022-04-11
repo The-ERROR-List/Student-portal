@@ -21,10 +21,10 @@ app.use(signup);
 
 
 app.use(errorHandler);
-app.use('*',notFoundHandler);
+app.use('*', notFoundHandler);
 
 function start(port) {
-    app.listen(port,()=>{
+    app.listen(port, () => {
         console.log(`running on port ${port}`)
     })
 }
