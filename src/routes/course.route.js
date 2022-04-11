@@ -3,14 +3,14 @@
 const express = require('express');
 const {courseModel} = require('../models/index');
 const router = express.Router();
+const bearer = require('../middlewares/bearer');
 
 
-
-router.post('/courses',addCourse);
-router.get('/courses',getAllcourses);
-router.get('courses/:id',getOneCourse);
-router.put('courses/:id',updateCourse);
-router.delete('courses/:id',deleteCourse);
+router.post('/courses',bearer,addCourse);
+router.get('/courses',bearer,getAllcourses);
+router.get('courses/:id',bearer,getOneCourse);
+router.put('courses/:id',bearer,updateCourse);
+router.delete('courses/:id',bearer,deleteCourse);
 
 
 

@@ -7,7 +7,7 @@ const router = require('express').Router();
 router.post('/signin', basicAuth, (req, res) => {
     userModel.findOne({
         where: {
-            username: req.body.username,
+            userName: req.body.userName,
             password: req.body.password
         }
     }).then(user => {

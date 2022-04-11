@@ -3,13 +3,13 @@
 const express = require('express');
 const {classModel} = require('../models/index');
 const router = express.Router();
+const bearer = require('../middlewares/bearer');
 
-
-router.get('/classes',getAllClasses);
-router.post('/classes',addClass);
-router.get('classes/:id',getOneClass);
-router.put('classes/:id',updateClass);
-router.delete('classes/:id',deleteClass);
+router.get('/classes',bearer,getAllClasses);
+router.post('/classes',bearer,addClass);
+router.get('classes/:id',bearer,getOneClass);
+router.put('classes/:id',bearer,updateClass);
+router.delete('classes/:id',bearer,deleteClass);
 
 
 
