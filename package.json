@@ -18,10 +18,7 @@
   },
   "homepage": "https://github.com/The-ERROR-List/Student-portal#readme",
   "dependencies": {
-<<<<<<< HEAD
-=======
     "base-64": "^1.0.0",
->>>>>>> ed7306f88d74ba72638219108be352d5b792305c
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
