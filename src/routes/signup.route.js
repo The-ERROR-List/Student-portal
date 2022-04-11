@@ -18,7 +18,7 @@ router.post("/signup", async (req, res) => {
     email: email,
     password: hashed,
     role: role,
-  });
+  }); 
 
   if (newUser.role == "student") {
     let { firstName, lastName, gender, nationality, major } = req.body;
