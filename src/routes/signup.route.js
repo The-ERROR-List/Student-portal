@@ -4,16 +4,19 @@ const express = require("express");
 const { userModel } = require("../models/index");
 const { studentModel } = require("../models/index");
 const { teacherModel } = require("../models/index");
+const bcrypt = require("bcrypt");
 
 const router = express.Router();
 
 router.post("/signup", async (req, res) => {
   console.log(req.body);
   let { userName, email, password, role } = req.body;
+  let hashed = await bcrypt.hash(password, 5);
+  console.log("hashed", hashed);
   let newUser = await userModel.create({
     userName: userName,
     email: email,
-    password: password,
+    password: hashed,
     role: role,
   });
 
