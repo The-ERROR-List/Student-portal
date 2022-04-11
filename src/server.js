@@ -4,7 +4,8 @@ require('dotenv').config();
 const notFoundHandler = require('./error-handlers/404');
 const errorHandler = require('./error-handlers/500');
 const signup = require ('./routes/signup.route');
-
+const classRoute = require('./routes/class.route');
+const courseRoute = require('./routes/course.route');
 const express = require('express');
 const app = express();
 
@@ -17,8 +18,8 @@ app.use(signup);
 // const http = require('http').Server(app);
 // const io = require('socket.io')(http);
 
-
-
+app.use(courseRoute);
+app.use(classRoute);
 
 app.use(errorHandler);
 app.use('*',notFoundHandler);
