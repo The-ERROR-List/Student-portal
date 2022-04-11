@@ -3,13 +3,14 @@ const cors = require('cors');
 require('dotenv').config();
 const notFoundHandler = require('./error-handlers/404');
 const errorHandler = require('./error-handlers/500');
+const signup = require ('./routes/signup.route');
 
 const express = require('express');
 const app = express();
 
 app.use(express.json());
 app.use(cors());
-
+app.use(signup);
 
 
 // socket.io server setup 
