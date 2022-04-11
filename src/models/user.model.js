@@ -1,6 +1,6 @@
 'use strict';
 const User = (sequelize, DataTypes) => sequelize.define('user', {
-    id : {
+    id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
@@ -17,15 +17,18 @@ const User = (sequelize, DataTypes) => sequelize.define('user', {
     },
     password: {
         type: DataTypes.STRING,
-        len: [8,16],
+        len: [8, 16],
         allowNull: false,
-    
+
     },
     role: {
         type: DataTypes.ENUM('student', 'teacher', 'admin'),
         allowNull: false,
         defaultValue: 'student',
-    
+
+    },
+    token: {
+        type: DataTypes.VIRTUAL
     },
     actions: {
         type: DataTypes.VIRTUAL,
@@ -33,10 +36,10 @@ const User = (sequelize, DataTypes) => sequelize.define('user', {
             const acl = {
                 student: ["read", "create"],
                 teacher: ["read", "create", "update"],
-                admin : ["read", "create", "update", "delete"]
+                admin: ["read", "create", "update", "delete"]
             };
             return acl[this.role];
-            }
+        }
     }
 
 });

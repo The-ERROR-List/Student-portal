@@ -12,7 +12,11 @@ router.post("/signup", async (req, res) => {
   console.log(req.body);
   let { userName, email, password, role } = req.body;
   let hashed = await bcrypt.hash(password, 5);
+<<<<<<< HEAD
   console.log("hssssssssssssss", hashed);
+=======
+  console.log("hashed", hashed);
+>>>>>>> ed7306f88d74ba72638219108be352d5b792305c
   let newUser = await userModel.create({
     userName: userName,
     email: email,
