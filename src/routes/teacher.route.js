@@ -26,7 +26,8 @@ router.put('/teacher/:id',bearer,async (req, res) => {
         where: {
             id: req.params.id
         }
-    });
+    }); 
+    
     let updatedTeacher = await teacher.update({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
