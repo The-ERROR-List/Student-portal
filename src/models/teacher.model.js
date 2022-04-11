@@ -14,8 +14,6 @@ const Teacher = (sequelize, DataTypes) => sequelize.define('teacher', {
         allowNull: false,
 
     },
-  
-    
     lastName: {
         type: DataTypes.STRING,
         allowNull: false,

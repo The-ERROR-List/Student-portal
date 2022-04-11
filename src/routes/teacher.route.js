@@ -1,29 +1,16 @@
 'use strict';
 const router = require('express').Router();
 const { teacherModel } = require('../models/index');
+const bearer = require('../middlewares/bearer');
 
 
-router.post('/addteacher', async (req, res) => {
-    let { firstName, lastName,gender,nationality,department} = req.body;
-    let newTeacher = await teacherModel.create({
-        firstName: firstName,
-        lastName: lastName,
-        gender : gender,
-        nationality : nationality,
-        department : department,
-    });
-    res.status(201).json({
-        "added teacher succesfully with the following info": newTeacher,
-    });
-})
-
-router.get('/allteachers',async()=>{
+router.get('/allteachers',bearer,async()=>{
     let teachers = await teacherModel.findAll();
     res.status(200).json({
         teachers: teachers
     });
 })
-router.get('/teacher/:id', async (req, res) => {
+router.get('/teacher/:id',bearer,async (req, res) => {
     let teacher = await teacherModel.findOne({
         where: {
             id: req.params.id
@@ -34,7 +21,7 @@ router.get('/teacher/:id', async (req, res) => {
     });
 
 })
-router.put('/teacher/:id', async (req, res) => {
+router.put('/teacher/:id',bearer,async (req, res) => {
     let teacher = await teacherModel.findOne({
         where: {
             id: req.params.id
@@ -49,7 +36,7 @@ router.put('/teacher/:id', async (req, res) => {
         'updated teacher succesfully with the following info': updatedTeacher,
     });
 })
-router.delete('/teacher/:id', async (req, res) => {
+router.delete('/teacher/:id',bearer,async (req, res) => {
     let teacher = await teacherModel.findOne({
         where: {
             id: req.params.id
@@ -60,3 +47,4 @@ router.delete('/teacher/:id', async (req, res) => {
         'deleted teacher succesfully with the following info': deletedTeacher,
     });
 })
+module.exports = router;

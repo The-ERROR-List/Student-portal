@@ -1,24 +1,11 @@
 'use strict';
 const router = require('express').Router();
 const { studentModel } = require('../models/index');
-
-router.post('/addstudent', async (req, res) => {
-    let { firstName, lastName,gender,nationality,major} = req.body;
-    let newStudent = await studentModel.create({
-        firstName: firstName,
-        lastName: lastName,
-        gender : gender,
-        nationality : nationality,
-        major : major,
-    });
-    res.status(201).json({
-        "added student succesfully with the following info": newStudent,
-    });
-});
+const bearer = require('../middlewares/bearer');
 
 
 
-router.get('/allstudents', async (req, res) => {
+router.get('/allstudents',bearer, async (req, res) => {
     let students = await studentModel.findAll();
     res.status(200).json({
         students: students
@@ -27,7 +14,7 @@ router.get('/allstudents', async (req, res) => {
 })
 
 
-router.get('/student/:id', async (req, res) => {
+router.get('/student/:id',bearer, async (req, res) => {
     let student = await studentModel.findOne({
         where: {
             id: req.params.id
@@ -39,7 +26,7 @@ router.get('/student/:id', async (req, res) => {
 
 })
 
-router.put('/student/:id', async (req, res) => {
+router.put('/student/:id',bearer, async (req, res) => {
     let student = await studentModel.findOne({
         where: {
             id: req.params.id
@@ -54,7 +41,7 @@ router.put('/student/:id', async (req, res) => {
         'updated student succesfully with the following info': updatedStudent,
     });
 })
-router.delete('/student/:id', async (req, res) => {
+router.delete('/student/:id',bearer,async (req, res) => {
     let student = await studentModel.findOne({
         where: {
             id: req.params.id
