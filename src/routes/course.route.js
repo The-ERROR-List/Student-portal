@@ -19,7 +19,7 @@ async function addCourse(req, res){
     let body = req.body;
     let addedCourse = await courseModel.create(body);
 
-res.status(201).json({'new class was added succesfully': addedCourse});
+res.status(201).json({'new course was added succesfully': addedCourse});
 
 }
 

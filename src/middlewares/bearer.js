@@ -12,7 +12,7 @@ const bearerAuth = async (req,res,next)=>{
     if (token) {
         
         const userToken = JWT.verify(token,SECRET);
-console.log(userToken.userName,'+++++');
+
         const User = await userModel.findOne({where:{userName : userToken.userName}});
 
         if (User) {
