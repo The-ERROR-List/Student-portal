@@ -6,7 +6,6 @@ const SECRET = process.env.SECRET;
 const { userModel } = require('../models/index');
 const bcrypt = require('bcrypt');
 
-
 const basicAuth = async (req, res, next) => {
     let basicAuthText = req.headers.authorization;
     try {
@@ -18,11 +17,14 @@ const basicAuth = async (req, res, next) => {
             const User = await userModel.findOne({ where: { userName: userName } });
             const valid = await bcrypt.compare(password, User.password);
             if (valid) {
-                req.User = User
-                let newToken = jwt.sign({ userName: User.userName }, SECRET)
+                let newToken = jwt.sign({username:User.username},SECRET,{expiresIn : 900000});
                 User.token = newToken;
-                res.status(200).json(User)
+                req.User = User
+                console.log('mmmmmmmmm',req.User);
                 next()
+
+                // res.status(200).json(User)
+                
             } else {
                 res.status(403).send('invalid sign in Password')
             }
