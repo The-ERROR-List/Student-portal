@@ -4,6 +4,8 @@ require('dotenv').config();
 const notFoundHandler = require('./error-handlers/404');
 const errorHandler = require('./error-handlers/500');
 const signup = require ('./routes/signup.route');
+const classRoute = require('./routes/class.route');
+const courseRoute = require('./routes/course.route');
 const signin = require('./routes/signin.route');
 const student = require('./routes/student.route');
 const teacher = require('./routes/teacher.route');
@@ -19,6 +21,8 @@ app.use(signup);
 app.use(signin);
 app.use(student);
 app.use(teacher);
+app.use(courseRoute);
+app.use(classRoute);
 // app.use(signout);
 
 
@@ -26,6 +30,8 @@ app.use(teacher);
 // socket.io server setup 
 // const http = require('http').Server(app);
 // const io = require('socket.io')(http);
+
+
 app.get('/', (req, res) => {
     res.status(200).send('Home Route!');
 });
