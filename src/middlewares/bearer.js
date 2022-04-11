@@ -8,10 +8,11 @@ const bearerAuth = async (req,res,next)=>{
       try {
     let bearerToken = req.headers.authorization.split(' ');
     let token = bearerToken.pop();
-    
+
     if (token) {
         
         const userToken = JWT.verify(token,SECRET);
+
         const User = await userModel.findOne({where:{userName : userToken.userName}});
 
         if (User) {

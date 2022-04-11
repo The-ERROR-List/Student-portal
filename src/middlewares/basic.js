@@ -18,10 +18,12 @@ const basicAuth = async (req, res, next) => {
             const User = await userModel.findOne({ where: { userName: userName } });
             const valid = await bcrypt.compare(password, User.password);
             if (valid) {
-                req.User = User
-                let newToken = jwt.sign({ userName: User.userName }, SECRET)
+                let newToken = jwt.sign({userName:User.userName},SECRET,{expiresIn : 900000});
                 User.token = newToken;
-                res.status(200).json(User)
+                req.User = User
+                // console.log('mmmmmmmmm',req.User);
+                // res.status(200).json(User)
+                
                 next()
             } else {
                 res.status(403).send('invalid sign in Password')
