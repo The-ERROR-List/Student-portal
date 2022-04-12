@@ -32,3 +32,4 @@ const bearerAuth = async (req, res, next) => {
 };
 
 module.exports = bearerAuth;
+
