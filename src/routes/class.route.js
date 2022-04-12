@@ -6,10 +6,10 @@ const router = express.Router();
 const bearer = require('../middlewares/bearer');
 
 router.get('/classes',bearer,getAllClasses);
-router.post('/classes',bearer,addClass);
+router.post('/classes',bearer,acl('delete'),addClass);
 router.get('classes/:id',bearer,getOneClass);
-router.put('classes/:id',bearer,updateClass);
-router.delete('classes/:id',bearer,deleteClass);
+router.put('classes/:id',bearer,acl('update'),updateClass);
+router.delete('classes/:id',bearer,acl('delete'),deleteClass);
 
 
 
