@@ -18,7 +18,11 @@ router.post("/signup", async (req, res) => {
     email: email,
     password: hashed,
     role: role,
-  });
+  }); 
+
+  if (newUser.role == "admin"){
+    res.status(201).json ({"added admin succesfully with the following info": newUser})
+  }
 
   if (newUser.role == "student") {
     let { firstName, lastName, gender, nationality, major } = req.body;
@@ -33,8 +37,8 @@ router.post("/signup", async (req, res) => {
     });
 
     res.status(201).json({
-        "added student succesfully with the following info": newStudent,
-      });
+      "added student succesfully with the following info": newStudent,
+    });
   } else if (newUser.role == "teacher") {
     let { firstName, lastName, gender, nationality, department } = req.body;
 
