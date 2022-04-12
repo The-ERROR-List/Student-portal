@@ -7,18 +7,20 @@ const {teacherModel} = require('../models/index.js');
 const {userModel} = require('../models/index.js');
 
 router.get('/course-teacher', getCourseTeacher);
-router.get('/course-student', getCourseStudent);
+// router.get('/course-student', getCourseStudent);
 router.get('/course-classes', getCourseClasses);
-router.get('/teacher-classes', getTeacherClasses);
-router.get('/student-classes', getStudentClasses);
+// router.get('/teacher-classes', getTeacherClasses);
+// router.get('/student-classes', getStudentClasses);
+
+async function getCourseTeacher (req,res){
+    let course
+}
 
 
 
 
 
-
-
-
+module.exports=router;
 
 
 
