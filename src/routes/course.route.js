@@ -4,13 +4,15 @@ const express = require('express');
 const {courseModel} = require('../models/index');
 const router = express.Router();
 const bearer = require('../middlewares/bearer');
+const acl = require('../middlewares/acl');
 
 
-router.post('/courses',bearer,addCourse);
+
+router.post('/courses',bearer,acl('delete'),addCourse);
 router.get('/courses',bearer,getAllcourses);
 router.get('courses/:id',bearer,getOneCourse);
-router.put('courses/:id',bearer,updateCourse);
-router.delete('courses/:id',bearer,deleteCourse);
+router.put('courses/:id',bearer,acl('update'),updateCourse);
+router.delete('courses/:id',bearer,acl('delete'),deleteCourse);
 
 
 
