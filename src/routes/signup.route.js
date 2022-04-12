@@ -5,10 +5,31 @@ const { userModel } = require("../models/index");
 const { studentModel } = require("../models/index");
 const { teacherModel } = require("../models/index");
 const bcrypt = require("bcrypt");
+const bearer = require("../middlewares/bearer");
+const acl = require("../middlewares/acl");
+
 
 const router = express.Router();
 
-router.post("/signup", async (req, res) => {
+router.post("/signup/admin", async (req, res) => {
+  console.log(req.body);
+  let { userName, email, password } = req.body;
+  let hashed = await bcrypt.hash(password, 5);
+  console.log("hashed", hashed);
+  let newUser = await userModel.create({
+    userName: userName,
+    email: email,
+    password: hashed,
+    role: 'admin'
+  }); 
+
+  if (newUser.role == "admin"){
+    res.status(201).json ({"added admin succesfully with the following info": newUser})
+  }
+
+});
+
+router.post("/signup/std-teacher",bearer,acl('delete'), async (req, res) => {
   console.log(req.body);
   let { userName, email, password, role } = req.body;
   let hashed = await bcrypt.hash(password, 5);

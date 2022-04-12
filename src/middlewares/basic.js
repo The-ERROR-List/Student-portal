@@ -1,8 +1,8 @@
 "use strict";
-require('dotenv').config()
+require('dotenv').config();
 const base64 = require('base-64');
 const jwt = require('jsonwebtoken');
-const SECRET = process.env.SECRET;
+const SECRET = process.env.SECRET || "something";
 const { userModel } = require('../models/index');
 const bcrypt = require('bcrypt');
 
@@ -21,9 +21,6 @@ const basicAuth = async (req, res, next) => {
                 let newToken = jwt.sign({userName:User.userName},SECRET,{expiresIn : 900000});
                 User.token = newToken;
                 req.User = User
-                // console.log('mmmmmmmmm',req.User);
-                // res.status(200).json(User)
-                
                 next()
             } else {
                 res.status(403).send('invalid sign in Password')
