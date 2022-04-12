@@ -10,9 +10,9 @@ const acl = require('../middlewares/acl');
 
 router.post('/courses',bearer,acl('delete'),addCourse);
 router.get('/courses',bearer,getAllcourses);
-router.get('courses/:id',bearer,getOneCourse);
-router.put('courses/:id',bearer,acl('update'),updateCourse);
-router.delete('courses/:id',bearer,acl('delete'),deleteCourse);
+router.get('/courses/:id',bearer,getOneCourse);
+router.put('/courses/:id',bearer,acl('update'),updateCourse);
+router.delete('/courses/:id',bearer,acl('delete'),deleteCourse);
 
 
 
@@ -46,13 +46,13 @@ let body = req.body;
 let id = req.params.id;
 const courses = courseModel.findOne({where :{id: id}});
 const updatedCourse = await courseModel.update(body);
-res.status(201).send(`class ${updatedCourse} was updated successfully`);
+res.status(201).send({"course was updated successfully": updatedCourse});
 }
 
 async function deleteCourse(req, res){
 let removedId = req.params.id;
 let removedCourse = await courseModel.destroy({where : {id: removedId}})
-res.status(204).send(`class ${removedCourse} was deleted successfully`);
+res.status(204).json({"course was deleted successfully": removedCourse});
 }
 
 module.exports = router;

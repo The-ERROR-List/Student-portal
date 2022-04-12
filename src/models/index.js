@@ -33,14 +33,11 @@ let ClassModel = classModel(sequelize, DataTypes);
 UserModel.hasOne(StudentModel);
 StudentModel.belongsTo(UserModel);
 
-UserModel.hasOne(TeacherModel);
-TeacherModel.belongsTo(UserModel);
-
 // TeacherModel.hasMany(ClassModel, { foreignKey: 'teacherId', sourceKey: 'id' })
 // ClassModel.belongsTo(TeacherModel, { foreignKey: 'teacherId', targetKey: 'id' })
 
-CourseModel.hasMany(TeacherModel, { foreignKey: 'teacherId', sourceKey: 'id' })
-TeacherModel.belongsTo(CourseModel, { foreignKey: 'teacherId', targetKey: 'id' })
+CourseModel.hasMany(TeacherModel, { foreignKey: 'courseId', sourceKey: 'id' })
+TeacherModel.belongsTo(CourseModel, { foreignKey: 'courseId', targetKey: 'id' })
 
 
 StudentModel.belongsToMany(ClassModel, { through: 'student_class' })
@@ -54,6 +51,7 @@ ClassModel.belongsTo(CourseModel, { foreignKey: 'courseId', targetKey: 'id' })
 
 // TeacherModel.belongsToMany(CourseModel, { through: 'teacher_course' })
 // CourseModel.belongsToMany(TeacherModel, { through: 'teacher_course' })
+
 
 
 module.exports = {

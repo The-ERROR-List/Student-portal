@@ -4,12 +4,13 @@ const express = require('express');
 const {classModel} = require('../models/index');
 const router = express.Router();
 const bearer = require('../middlewares/bearer');
+const acl = require('../middlewares/acl')
 
 router.get('/classes',bearer,getAllClasses);
 router.post('/classes',bearer,acl('delete'),addClass);
-router.get('classes/:id',bearer,getOneClass);
-router.put('classes/:id',bearer,acl('update'),updateClass);
-router.delete('classes/:id',bearer,acl('delete'),deleteClass);
+router.get('/classes/:id',bearer,getOneClass);
+router.put('/classes/:id',bearer,acl('update'),updateClass);
+router.delete('/classes/:id',bearer,acl('delete'),deleteClass);
 
 
 
@@ -27,7 +28,7 @@ async function addClass(req, res){
     let body = req.body;
     let addedClass = await classModel.create(body);
 
-res.status(201).json('new class was added succesfully',addedClass);
+res.status(201).json({'new class was added succesfully':addedClass});
 
 }
 
@@ -42,13 +43,13 @@ let body = req.body;
 let id = req.params.id;
 const classes = classModel.findOne({where :{id: id}});
 const updatedClass = await classModel.update(body);
-res.status(201).send(`class ${updatedClass} was updated successfully`);
+res.status(201).json({"class was updated successfully": updatedClass});
 }
 
 async function deleteClass(req, res){
 let removedId = req.params.id;
 let removedClass = await classModel.destroy({where : {id: removedId}})
-res.status(204).send(`class ${removedClass} was deleted successfully`);
+res.status(204).json({"class  was deleted successfully": removedClass});
 }
 
 module.exports = router;

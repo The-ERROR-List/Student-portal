@@ -5,7 +5,7 @@ const bearer = require('../middlewares/bearer');
 const acl = require('../middlewares/acl');
 
 
-router.get('/allteachers',bearer,async()=>{
+router.get('/allteachers',bearer,async(req,res)=>{
     let teachers = await teacherModel.findAll();
     res.status(200).json({
         teachers: teachers
