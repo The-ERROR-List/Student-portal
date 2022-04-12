@@ -5,10 +5,11 @@ const { courseModel } = require('../models/index.js');
 const { studentModel } = require('../models/index.js');
 const { teacherModel } = require('../models/index.js');
 const { userModel } = require('../models/index.js');
-
-router.get('/course-teacher', getAllCourseTeacher);
-router.get('/user-student', getStudentUser);
-router.get('/course-classes', getCourseClasses);
+const bearer = require('../middlewares/bearer');
+router.get('/course-teacher',bearer, getAllCourseTeacher);
+router.get('/user-student',bearer,getStudentUser);
+router.get('/user-teacher',bearer,getTeacherUser);
+router.get('/course-classes',bearer,getCourseClasses);
 // router.get('/teacher-classes', getTeacherClasses);
 // router.get('/student-classes', getStudentClasses);
 
@@ -40,7 +41,23 @@ async  function getCourseClasses(req, res) {
 //     try {
 //         let UserModel = await studentModel.findAll({ include: [userModel] })
 //         res.json(student);
-
+async function getStudentUser(req, res) {
+    try {
+        let student = await studentModel.findAll({ include: [userModel] })
+        res.json(student);
+    }
+catch(err) {
+    res.status(500).json({ message: err.message });
+}
+}
+async function getTeacherUser(req, res) {
+    try {
+        let teacher = await teacherModel.findAll({ include: [userModel] })
+        res.json(teacher);
+    }catch(err) {
+        res.status(500).json({ message: err.message });
+    }
+}
 
 module.exports = router;
 
