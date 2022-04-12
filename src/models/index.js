@@ -39,8 +39,8 @@ TeacherModel.belongsTo(UserModel);
 // TeacherModel.hasMany(ClassModel, { foreignKey: 'teacherId', sourceKey: 'id' })
 // ClassModel.belongsTo(TeacherModel, { foreignKey: 'teacherId', targetKey: 'id' })
 
-CourseModel.hasMany(TeacherModel, { foreignKey: 'courseId', sourceKey: 'id' })
-TeacherModel.belongsTo(CourseModel, { foreignKey: 'courseId', targetKey: 'id' })
+CourseModel.hasMany(TeacherModel, { foreignKey: 'teacherId', sourceKey: 'id' })
+TeacherModel.belongsTo(CourseModel, { foreignKey: 'teacherId', targetKey: 'id' })
 
 
 StudentModel.belongsToMany(ClassModel, { through: 'student_class' })
