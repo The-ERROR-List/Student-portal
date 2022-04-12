@@ -1,31 +1,26 @@
 'use strict';
- const Course =  (sequelize,DataTypes) => sequelize.define('course',{
-    id : {
+const Course = (sequelize, DataTypes) => sequelize.define('course', {
+    id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
     },
-    courseName :{
+    courseName: {
         type: DataTypes.STRING,
         allowNull: false,
 
     },
-  
-    courseGrade:{
+
+    courseGrade: {
         type: DataTypes.INTEGER,
-        allowNull: false, 
+        allowNull: false,
     },
-    teacherId :{
+    teacherId: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false, //foreign key   
-    
-    },
-    studentId:{
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-        allowNull: false, //foreign key
 
     },
- })
+
+})
 module.exports = Course;
