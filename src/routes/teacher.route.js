@@ -32,6 +32,7 @@ router.put('/teacher/:id',bearer,acl('delete'),async (req, res) => {
     let updatedTeacher = await teacher.update({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
+        courseId : req.body.courseId,
     
     })
     res.status(200).json({
