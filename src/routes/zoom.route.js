@@ -17,7 +17,7 @@ const token = jwt.sign(payload, process.env.API_SECRET); //your API SECRET HERE
 
 router.get("/createMeeting",bearer,acl('update'), (req, res) => {
  let email = "alaqoulibrahim@gmail.com"; // your zoom developer email account
-  var options = {
+   var options = {
     method: "POST",
     uri: "https://api.zoom.us/v2/users/" + email + "/meetings",
     body: {
