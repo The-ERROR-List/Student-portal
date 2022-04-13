@@ -12,9 +12,10 @@ const teacher = require('./routes/teacher.route');
 const includeRouter = require('./routes/include.route');
 const profile = require('./routes/profile.route');
 // const signout = require('./routes/signout.route');
-
+const zoom = require('./routes/zoom.route');
 
 const express = require('express');
+const req = require('express/lib/request');
 const app = express();
 
 app.use(express.json());
@@ -27,6 +28,7 @@ app.use(courseRoute);
 app.use(classRoute);
 app.use(includeRouter);
 app.use(profile);
+app.use(zoom);
 
 // app.use(signout);
 
