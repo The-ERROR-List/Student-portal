@@ -3,12 +3,13 @@ const cors = require('cors');
 require('dotenv').config();
 const notFoundHandler = require('./error-handlers/404');
 const errorHandler = require('./error-handlers/500');
-const signup = require ('./routes/signup.route');
+const signup = require('./routes/signup.route');
 const classRoute = require('./routes/class.route');
 const courseRoute = require('./routes/course.route');
 const signin = require('./routes/signin.route');
 const student = require('./routes/student.route');
 const teacher = require('./routes/teacher.route');
+const includeRouter = require('./routes/include.route');
 // const signout = require('./routes/signout.route');
 
 
@@ -23,6 +24,8 @@ app.use(student);
 app.use(teacher);
 app.use(courseRoute);
 app.use(classRoute);
+app.use(includeRouter);
+
 // app.use(signout);
 
 

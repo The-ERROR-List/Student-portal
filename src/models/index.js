@@ -51,6 +51,7 @@ ClassModel.belongsToMany(StudentModel, { through: 'student_class' })
 
 
 
+
 module.exports = {
     db: sequelize,
     studentModel: StudentModel,

@@ -3,6 +3,7 @@ const router = require('express').Router();
 const { studentModel } = require('../models/index');
 const { classModel } = require('../models/index');
 const bearer = require('../middlewares/bearer');
+const acl = require('../middlewares/acl');
 
 
 
@@ -27,7 +28,7 @@ router.get('/student/:id',bearer, async (req, res) => {
 
 })
 
-router.put('/student/:id',bearer, async (req, res) => {
+router.put('/student/:id',bearer,acl('update'), async (req, res) => {
     let student = await studentModel.findOne({
         where: {
             id: req.params.id
@@ -42,7 +43,7 @@ router.put('/student/:id',bearer, async (req, res) => {
         'updated student succesfully with the following info': updatedStudent,
     });
 })
-router.delete('/student/:id',bearer,async (req, res) => {
+router.delete('/student/:id',bearer,acl('delete'),async (req, res) => {
     let student = await studentModel.findOne({
         where: {
             id: req.params.id

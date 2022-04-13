@@ -3,13 +3,16 @@
 const express = require("express");
 const { classModel, courseModel, studentModel } = require("../models/index");
 const router = express.Router();
-const bearer = require("../middlewares/bearer");
 
-router.get("/classes", bearer, getAllClasses);
-router.post("/classes", bearer, addClass);
-router.get("classes/:id", bearer, getOneClass);
-router.put("classes/:id", bearer, updateClass);
-router.delete("classes/:id", bearer, deleteClass);
+const bearer = require('../middlewares/bearer');
+const acl = require('../middlewares/acl')
+
+router.get('/classes',bearer,getAllClasses);
+router.post('/classes',bearer,acl('delete'),addClass);
+router.get('/classes/:id',bearer,getOneClass);
+router.put('/classes/:id',bearer,acl('update'),updateClass);
+router.delete('/classes/:id',bearer,acl('delete'),deleteClass);
+
 
 async function getAllClasses(req, res) {
   let classes = await classModel.findAll();
@@ -39,7 +42,7 @@ async function updateClass(req, res) {
 async function deleteClass(req, res) {
   let removedId = req.params.id;
   let removedClass = await classModel.destroy({ where: { id: removedId } });
-  res.status(204).send(`class ${removedClass} was deleted successfully`);
+  res.status(200).send(`class ${removedClass} was deleted successfully`);
 }
 
 router.post("/add-students-toClass/:id", async (req, res) => {
