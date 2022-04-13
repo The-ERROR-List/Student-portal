@@ -2,6 +2,8 @@
 
 const express = require('express');
 const {courseModel} = require('../models/index');
+const {teacherModel} = require ('../models/index');
+const {classModel} = require ('../models/index');
 const router = express.Router();
 const bearer = require('../middlewares/bearer');
 
@@ -52,5 +54,26 @@ let removedId = req.params.id;
 let removedCourse = await courseModel.destroy({where : {id: removedId}})
 res.status(204).send(`class ${removedCourse} was deleted successfully`);
 }
+
+
+router.get('/allcourses-with-their-teachers',bearer,async(req, res)=>{
+    let courses = await courseModel.findAll({
+        include : [teacherModel] // all the teachers that teach this course
+    });
+    console.log(courses);
+    res.status(200).json({
+        courses: courses
+    });
+})
+
+router.get('/allcourses-and-their-classes',bearer,async(req, res)=>{
+    let courses = await courseModel.findAll({
+        include : [classModel] // all the classes for this course
+    });
+    console.log(courses);
+    res.status(200).json({
+        courses: courses
+    });
+})
 
 module.exports = router;

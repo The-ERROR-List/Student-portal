@@ -14,18 +14,6 @@
     courseGrade:{
         type: DataTypes.INTEGER,
         allowNull: false, 
-    },
-    teacherId :{
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-        allowNull: false, //foreign key   
-    
-    },
-    studentId:{
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-        allowNull: false, //foreign key
-
-    },
+    }
  })
 module.exports = Course;
