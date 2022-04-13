@@ -1,8 +1,8 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
-// const bearer=require('../middleware/bearer');
-// const acl = require('../middleware/acl');
+const bearer=require('../middleware/bearer');
+const acl = require('../middleware/acl');
 const rp = require('request-promise');
 
 
@@ -15,9 +15,9 @@ const payload = {
 };
 const token = jwt.sign(payload, process.env.API_SECRET); //your API SECRET HERE
 
-router.get("/createMeeting", (req, res) => {
+router.get("/createMeeting",bearer,acl('update'), (req, res) => {
  let email = "alaqoulibrahim@gmail.com"; // your zoom developer email account
-  var options = {
+   var options = {
     method: "POST",
     uri: "https://api.zoom.us/v2/users/" + email + "/meetings",
     body: {
