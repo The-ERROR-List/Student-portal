@@ -13,14 +13,8 @@ const Course = (sequelize, DataTypes) => sequelize.define('course', {
 
     courseGrade: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-    },
-    // teacherId: {
-    //     type: DataTypes.UUID,
-    //     defaultValue: DataTypes.UUIDV4,
-    //     allowNull: false, //foreign key   
+        allowNull: false, 
+    }
+ })
 
-    // },
-
-})
 module.exports = Course;

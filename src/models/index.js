@@ -33,24 +33,22 @@ let ClassModel = classModel(sequelize, DataTypes);
 UserModel.hasOne(StudentModel);
 StudentModel.belongsTo(UserModel);
 
-// TeacherModel.hasMany(ClassModel, { foreignKey: 'teacherId', sourceKey: 'id' })
-// ClassModel.belongsTo(TeacherModel, { foreignKey: 'teacherId', targetKey: 'id' })
+UserModel.hasOne(TeacherModel);
+TeacherModel.belongsTo(UserModel);
 
-CourseModel.hasMany(TeacherModel, { foreignKey: 'courseId', sourceKey: 'id' })
-TeacherModel.belongsTo(CourseModel, { foreignKey: 'courseId', targetKey: 'id' })
+TeacherModel.belongsToMany(CourseModel, { through: 'teacher_course' })
+CourseModel.belongsToMany(TeacherModel, { through: 'teacher_course' })
 
+CourseModel.hasMany(ClassModel);
+ClassModel.belongsTo(CourseModel); // course can exist without class but class can't exist without course, therfore i will have the courseId as a FK in the class
+
+//teacher can exist without class 
+TeacherModel.hasMany(ClassModel);
+ClassModel.belongsTo(TeacherModel);
 
 StudentModel.belongsToMany(ClassModel, { through: 'student_class' })
 ClassModel.belongsToMany(StudentModel, { through: 'student_class' })
 
-CourseModel.hasMany(ClassModel, { foreignKey: 'courseId', sourceKey: 'id' })
-ClassModel.belongsTo(CourseModel, { foreignKey: 'courseId', targetKey: 'id' })
-
-// StudentModel.belongsToMany(CourseModel, { through: 'student_course' })
-// CourseModel.belongsToMany(StudentModel, { through: 'student_course' })
-
-// TeacherModel.belongsToMany(CourseModel, { through: 'teacher_course' })
-// CourseModel.belongsToMany(TeacherModel, { through: 'teacher_course' })
 
 
 

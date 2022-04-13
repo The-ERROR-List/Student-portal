@@ -1,16 +1,20 @@
 'use strict';
 const router = require('express').Router();
 const { teacherModel } = require('../models/index');
+const {courseModel} = require ('../models/index');
 const bearer = require('../middlewares/bearer');
 const acl = require('../middlewares/acl');
 
 
+
 router.get('/allteachers',bearer,async(req,res)=>{
+
     let teachers = await teacherModel.findAll();
     res.status(200).json({
         teachers: teachers
     });
 })
+
 router.get('/teacher/:id',bearer,async (req, res) => {
     let teacher = await teacherModel.findOne({
         where: {
@@ -50,4 +54,15 @@ router.delete('/teacher/:id',bearer,acl('delete'),async (req, res) => {
         'deleted teacher succesfully with the following info': deletedTeacher,
     });
 })
+
+router.get('/allteachers-with-their-courses',bearer,async(req, res)=>{
+    let teachers = await teacherModel.findAll({
+        include : [courseModel] // // all the courses taught by this teacher
+    });
+    res.status(200).json({
+        teachers: teachers //wrong
+    });
+})
+
+
 module.exports = router;
