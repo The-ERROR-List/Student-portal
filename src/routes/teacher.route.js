@@ -55,14 +55,45 @@ router.delete('/teacher/:id',bearer,acl('delete'),async (req, res) => {
     });
 })
 
-router.get('/allteachers-with-their-courses',bearer,async(req, res)=>{
-    let teachers = await teacherModel.findAll({
-        include : [courseModel] // // all the courses taught by this teacher
+router.post("/add-course-toTeacher/:id", async (req, res) => {
+    let teacher = await teacherModel.findOne({
+      where: {
+        id: req.params.id,
+      },
     });
-    res.status(200).json({
-        teachers: teachers //wrong
+  
+    let addCourses = await courseModel.findOne({
+      where: {
+        id: req.body.chosenCourse,
+      },
     });
-})
+  
+    await teacher.addCourse(addCourses);
+    res
+      .status(201)
+      .send(
+        `Teacher ${teacher.firstName} added ${addCourses.courseName} successfully to their courses`
+      );
+  });
+  
+  
+  router.get("/get-allCourses-for-teacher/:id", async (req, res) => {
+  
+    let teacher = await teacherModel.findOne({
+        where: {
+          id: req.params.id,
+        },
+      });
+  
+    let response = await teacher.getCourses();
+  
+    let allCourses = response.map((element) => {
+    
+      return element.teacher_course.dataValues.courseId;
+    });
+    
+    res.send(`${teacher.firstName} has: ${allCourses}`);
+  });
 
 
 module.exports = router;

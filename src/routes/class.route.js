@@ -62,7 +62,7 @@ router.post("/add-students-toClass/:id", async (req, res) => {
   res
     .status(201)
     .send(
-      `student ${toAddStudent.firstName} added successfully to class ${currentClass.className}`
+      `student ${toAddStudent.firstName} added successfully to ${currentClass.courseName} course, in ${currentClass.className}`
     );
 });
 
