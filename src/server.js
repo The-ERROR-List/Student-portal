@@ -9,7 +9,6 @@ const courseRoute = require('./routes/course.route');
 const signin = require('./routes/signin.route');
 const student = require('./routes/student.route');
 const teacher = require('./routes/teacher.route');
-const includeRouter = require('./routes/include.route');
 const profile = require('./routes/profile.route');
 // const signout = require('./routes/signout.route');
 const zoom = require('./routes/zoom.route');
@@ -26,7 +25,6 @@ app.use(student);
 app.use(teacher);
 app.use(courseRoute);
 app.use(classRoute);
-app.use(includeRouter);
 app.use(profile);
 app.use(zoom);
 
