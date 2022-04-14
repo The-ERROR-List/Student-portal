@@ -45,7 +45,7 @@ async function deleteClass(req, res) {
   res.status(200).send(`class ${removedClass} was deleted successfully`);
 }
 
-router.post("/add-students-toClass/:id", async (req, res) => {
+router.post("/add-students-toClass/:id",bearer,acl('delete'), async (req, res) => {
   let currentClass = await classModel.findOne({
     where: {
       id: req.params.id,

@@ -55,7 +55,7 @@ router.delete('/teacher/:id',bearer,acl('delete'),async (req, res) => {
     });
 })
 
-router.post("/add-course-toTeacher/:id", async (req, res) => {
+router.post("/add-course-toTeacher/:id",bearer,acl('delete'),async (req, res) => {
     let teacher = await teacherModel.findOne({
       where: {
         id: req.params.id,

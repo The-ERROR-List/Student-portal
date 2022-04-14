@@ -55,7 +55,7 @@ router.delete('/student/:id',bearer,acl('delete'),async (req, res) => {
     });
 })
 
-router.post('/choose-class/:id', async (req, res)=>{
+router.post('/choose-class/:id',bearer,acl('delete'), async (req, res)=>{
 
     let currentStudent = await studentModel.findOne ({
         where: {
