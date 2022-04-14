@@ -1,8 +1,8 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
-const bearer=require('../middleware/bearer');
-const acl = require('../middleware/acl');
+const bearer = require('../middlewares/bearer');
+const acl = require('../middlewares/acl');
 const rp = require('request-promise');
 
 
@@ -16,8 +16,8 @@ const payload = {
 const token = jwt.sign(payload, process.env.API_SECRET); //your API SECRET HERE
 
 router.get("/createMeeting",bearer,acl('update'), (req, res) => {
- let email = "alaqoulibrahim@gmail.com"; // your zoom developer email account
-   var options = {
+  let email = "alaqoulibrahim@gmail.com"; // your zoom developer email account
+  var options = {
     method: "POST",
     uri: "https://api.zoom.us/v2/users/" + email + "/meetings",
     body: {
@@ -37,7 +37,7 @@ router.get("/createMeeting",bearer,acl('update'), (req, res) => {
     },
     json: true, //Parse the JSON string in the response
   };
-  rp(options) 
+  rp(options)
     .then(function (response) {
       console.log("response is: ", response);
       res.send("create meeting result: " + JSON.stringify(response));
@@ -46,7 +46,8 @@ router.get("/createMeeting",bearer,acl('update'), (req, res) => {
     .catch(function (err) {
       // API call failed...
       console.log("API call failed, reason ", err);
-    });}
+    });
+}
 );
 
 module.exports = router;
