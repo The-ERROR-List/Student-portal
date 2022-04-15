@@ -15,17 +15,13 @@ module.exports = (email) => {
   //You have to create the transporter object only once. If you already have a transporter object you can use it to send mail as much as you like.
 
   let htmltext = `
-<p>please enter your new password <br>
-password: ${password} <br>
-confirm your password: ${password}
-</p>
-
-`;
+<p>Did you forget your  password ?<br>
+  <a href="http://localhost:3000/reset-password/newpassword">Click here to reset your password</a>
+</p>`;
 
   let options = {
     from: "elearning-server-project@outlook.com", // sender address
     to: email, // list of receivers
-    subject: "Reset your password", // Subject line
     html: htmltext, // html body
   };
 
