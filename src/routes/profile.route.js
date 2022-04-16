@@ -20,11 +20,13 @@ router.get("/reset-password/emailcheck",async (req, res,next) => {
 
 
 router.get("/reset-password/newpassword", async (req, res) => {
+
   let {email,password} = req.body; 
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password,salt);
   const user = await userModel.update({ password: hash }, { where: { email: req.body.email } });
   res.status(200).send(`password updated successfully for user : ${email}`);
+  
 });
 
 
