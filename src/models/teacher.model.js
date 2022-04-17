@@ -9,11 +9,6 @@ const Teacher = (sequelize, DataTypes) => sequelize.define('teacher', {
         type: DataTypes.UUID,
         allowNull: false,
     },
-     courseId: {
-        type: DataTypes.UUID,
-        allowNull: true,
-    },
-
     firstName: {
         type: DataTypes.STRING,
         allowNull: false,
