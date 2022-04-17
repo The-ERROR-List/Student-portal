@@ -31,6 +31,11 @@ app.use(profile);
 app.use(include);
 app.use(zoom);
 
+
+app.get('/', (req, res) => {
+    res.status(200).send('Home Route!');
+});
+
 // socket.io server setup 
 
 app.use(express.static(__dirname + '/whiteboard'));
@@ -45,9 +50,7 @@ const whiteBoard = io.of('/whiteboard');
 whiteBoard.on('connection', onConnection);
 
 
-app.get('/', (req, res) => {
-    res.status(200).send('Home Route!');
-});
+
 
 
 
