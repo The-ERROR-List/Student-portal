@@ -11,10 +11,11 @@ const signin = require('./routes/signin.route');
 const student = require('./routes/student.route');
 const teacher = require('./routes/teacher.route');
 const profile = require('./routes/profile.route');
-const include = require('./routes/include.js');
+// const signout = require('./routes/signout.route');
 const zoom = require('./routes/zoom.route');
 
 const express = require('express');
+const req = require('express/lib/request');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
@@ -28,8 +29,11 @@ app.use(teacher);
 app.use(courseRoute);
 app.use(classRoute);
 app.use(profile);
-app.use(include);
 app.use(zoom);
+
+// app.use(signout);
+
+
 
 // socket.io server setup 
 
