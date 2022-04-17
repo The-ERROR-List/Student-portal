@@ -12,6 +12,7 @@ const student = require('./routes/student.route');
 const teacher = require('./routes/teacher.route');
 const profile = require('./routes/profile.route');
 // const signout = require('./routes/signout.route');
+const include = require('./routes/include.js');
 const zoom = require('./routes/zoom.route');
 
 const express = require('express');
@@ -29,6 +30,7 @@ app.use(teacher);
 app.use(courseRoute);
 app.use(classRoute);
 app.use(profile);
+app.use(include);
 app.use(zoom);
 
 // app.use(signout);
