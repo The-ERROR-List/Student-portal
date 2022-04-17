@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/socketIO/style/msg.css"/>
+    <title>Chat Room</title>
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.1/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <section id="messages">
+        <input type="hidden" value=""id="name">
+        <input type="hidden" value= ""id="room">
+        <input type="hidden" value="" id="color">
+        <input type="hidden" id="image-support" value="false">
+        <input type="file" accept="image/*" hidden>
+
+        <div class="message-container">
+            <header>
+                <span>
+                   Messages
+                </span>
+    
+                <span class="online-users-number"></span>
+            </header>
+    
+            <div class="users-typying hidden"></div>
+    
+            <div class="section-message">
+               
+            </div>
+            <div class="image-viewer hidden">
+                <i class="bi bi-x image-viewer-close"></i>
+                <img src="" class="image-preview">
+
+                <div  class="upload-image">
+                    <span class="progress">
+                        <span class="progress-line"></span>
+                    </span>
+                    <span class="percentage"></span>
+                </div>
+            </div>
+    
+            <div class="editor">
+                <i class="bi bi-image icon-image"></i>
+                <input type="text" class="message" placeholder="Type a message">
+                <button class="btn-send">Send</button>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+
+    </script>
+</body>
+</html>
