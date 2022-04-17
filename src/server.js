@@ -1,6 +1,7 @@
 'use strict';
 const cors = require('cors');
 require('dotenv').config();
+
 const notFoundHandler = require('./error-handlers/404');
 const errorHandler = require('./error-handlers/500');
 const signup = require('./routes/signup.route');
@@ -16,6 +17,8 @@ const zoom = require('./routes/zoom.route');
 const express = require('express');
 const req = require('express/lib/request');
 const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
 app.use(express.json());
 app.use(cors());
@@ -33,8 +36,17 @@ app.use(zoom);
 
 
 // socket.io server setup 
-// const http = require('http').Server(app);
-// const io = require('socket.io')(http);
+
+app.use(express.static(__dirname + '/whiteboard'));
+
+function onConnection(socket){
+    socket.on('drawing', (data) => socket.broadcast.emit('drawing', data));
+}
+app.get("/whiteboard", (req, res) => {
+    res.sendFile(__dirname + '/whiteboard/index.html');
+})
+const whiteBoard = io.of('/whiteboard');
+whiteBoard.on('connection', onConnection);
 
 
 app.get('/', (req, res) => {
@@ -47,7 +59,7 @@ app.use(errorHandler);
 app.use('*', notFoundHandler);
 
 function start(port) {
-    app.listen(port, () => {
+    http.listen(port, () => {
         console.log(`running on port ${port}`)
     })
 }
