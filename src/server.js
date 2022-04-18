@@ -11,10 +11,11 @@ const signin = require('./routes/signin.route');
 const student = require('./routes/student.route');
 const teacher = require('./routes/teacher.route');
 const profile = require('./routes/profile.route');
-const include = require('./routes/include.js');
+// const signout = require('./routes/signout.route');
 const zoom = require('./routes/zoom.route');
 
 const express = require('express');
+const req = require('express/lib/request');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
@@ -28,7 +29,6 @@ app.use(teacher);
 app.use(courseRoute);
 app.use(classRoute);
 app.use(profile);
-app.use(include);
 app.use(zoom);
 
 
@@ -56,15 +56,20 @@ whiteBoard.on('connection', onConnection);
 
 const socketMessages = io.of('/socketMessages');
 socketMessages.on('connect', (socket) => {
-    socket.on('send-message', (message,room) => {
+    socket.on('send-message', (message,user,room) => {
         if (room === '') {
-            socket.broadcast.emit('recieved-message', message)
+            socket.broadcast.emit('recieved-message',message,user);
     
-         }else{
-             socket.to(room).emit('recieved-message', message)
-         }
-     })
-     socket.on('join',(room,joinedMessageCb)=>{
+        }else{
+            socket.to(room).emit('recieved-message',message,user);
+        }
+    })
+    
+    socket.on('join-user',(user,joinedMessageCb) =>{
+            socket.join(user);
+            joinedMessageCb(`Joined ${user}`);
+    })
+    socket.on('join',(room,joinedMessageCb)=>{
         socket.join(room)
         joinedMessageCb(`Joined ${room} room`)
     })
