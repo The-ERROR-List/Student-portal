@@ -56,15 +56,20 @@ whiteBoard.on('connection', onConnection);
 
 const socketMessages = io.of('/socketMessages');
 socketMessages.on('connect', (socket) => {
-    socket.on('send-message', (message,room) => {
+    socket.on('send-message', (message,user,room) => {
         if (room === '') {
-            socket.broadcast.emit('recieved-message', message)
+            socket.broadcast.emit('recieved-message',message,user);
     
-         }else{
-             socket.to(room).emit('recieved-message', message)
-         }
-     })
-     socket.on('join',(room,joinedMessageCb)=>{
+        }else{
+            socket.to(room).emit('recieved-message',message,user);
+        }
+    })
+    
+    socket.on('join-user',(user,joinedMessageCb) =>{
+            socket.join(user);
+            joinedMessageCb(`Joined ${user}`);
+    })
+    socket.on('join',(room,joinedMessageCb)=>{
         socket.join(room)
         joinedMessageCb(`Joined ${room} room`)
     })
