@@ -39,16 +39,37 @@ app.get('/', (req, res) => {
 // socket.io server setup 
 
 app.use(express.static(__dirname + '/whiteboard'));
+app.use(express.static(__dirname + '/socket-messages'));
 
-function onConnection(socket){
+function onConnection(socket) {
     socket.on('drawing', (data) => socket.broadcast.emit('drawing', data));
 }
 app.get("/whiteboard", (req, res) => {
     res.sendFile(__dirname + '/whiteboard/index.html');
 })
+app.get('/socketMessages', (req, res) => {
+    res.sendFile(__dirname + '/socket-messages/index.html');
+});
+
 const whiteBoard = io.of('/whiteboard');
 whiteBoard.on('connection', onConnection);
 
+const socketMessages = io.of('/socketMessages');
+socketMessages.on('connect', (socket) => {
+    socket.on('send-message', (message,room) => {
+        if (room === '') {
+            socket.broadcast.emit('recieved-message', message)
+    
+         }else{
+             socket.to(room).emit('recieved-message', message)
+         }
+     })
+     socket.on('join',(room,joinedMessageCb)=>{
+        socket.join(room)
+        joinedMessageCb(`Joined ${room} room`)
+    })
+
+});
 
 
 
