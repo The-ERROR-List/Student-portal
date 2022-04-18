@@ -1,0 +1,18 @@
+{
+    "test": {
+        "username" : "username",
+        "password" : "password",
+        "database" : "elearningdb",
+         "host" : "127.0.0.1",
+         "dialect":"sqlite:memory"
+    },
+    "production" : {
+        "username" : "username",
+        "password" : "password",
+        "database" : "elearningdb",
+         "host" : "127.0.0.1",
+         "dialect":"postgress"
+    }
+
+    
+}
