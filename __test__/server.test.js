@@ -14,7 +14,7 @@ describe ('Server', () => {
     });
     it ('should return a 200 response for bad method',async () => {
         const response= await request.post('/');
-        expect(response.status).toBe(200);
+        expect(response.status).toBe(404);
     });
     
 });
