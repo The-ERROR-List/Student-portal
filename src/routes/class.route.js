@@ -22,8 +22,8 @@ async function getAllClasses(req, res) {
 async function addClass(req, res) {
   let body = req.body;
   let addedClass = await classModel.create(body);
-  res.status(201).json({ "new class was added succesfully": addedClass }); // you have to send courseId in req.body
-} // to create the class inside a specific coursew
+  res.status(201).json({ "new class was added succesfully": addedClass }); // you have to send courseId and teacherId in req.body
+} // to create the class inside a specific course
 
 async function getOneClass(req, res) {
   let classId = parseInt(req.params.id);
@@ -45,6 +45,8 @@ async function deleteClass(req, res) {
   res.status(200).send(`class ${removedClass} was deleted successfully`);
 }
 
+// for admin to add students, 
+// but please don't add a student if they already joined the class using their route /choose-class/:id
 router.post("/add-students-toClass/:id",bearer,acl('delete'), async (req, res) => {
   let currentClass = await classModel.findOne({
     where: {
@@ -62,11 +64,12 @@ router.post("/add-students-toClass/:id",bearer,acl('delete'), async (req, res) =
   res
     .status(201)
     .send(
-      `student ${toAddStudent.firstName} added successfully to ${currentClass.courseName} course, in ${currentClass.className}`
+      `student ${toAddStudent.firstName} added successfully in ${currentClass.className}`
     );
 });
 
 
+// this will get me all the students in a specific class
 router.get("/get-allStudents-inClass/:id", async (req, res) => {
 
   let currentClass = await classModel.findOne({
@@ -76,15 +79,12 @@ router.get("/get-allStudents-inClass/:id", async (req, res) => {
   });
 
   let myresponse = await currentClass.getStudents();
-
+  
   let allStudents = myresponse.map((ele) => {
-    return ele.student_class.studentId;
+    return `${ele.dataValues.firstName} ${ele.dataValues.lastName}`
   }); // print all students
   
   res.send(`${currentClass.className} has: ${allStudents}`);
-
-  // grab all my classes
-  // this will get me all the students in a specific class
 });
 
 module.exports = router;
