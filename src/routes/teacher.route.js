@@ -55,6 +55,7 @@ router.delete('/teacher/:id',bearer,acl('delete'),async (req, res) => {
     });
 })
 
+//for teachers to choose courses
 router.post("/add-course-toTeacher/:id",bearer,acl('delete'),async (req, res) => {
     let teacher = await teacherModel.findOne({
       where: {
@@ -76,7 +77,7 @@ router.post("/add-course-toTeacher/:id",bearer,acl('delete'),async (req, res) =>
       );
   });
   
-  
+  //for teachers to see all their courses
   router.get("/get-allCourses-for-teacher/:id", async (req, res) => {
   
     let teacher = await teacherModel.findOne({
@@ -85,14 +86,13 @@ router.post("/add-course-toTeacher/:id",bearer,acl('delete'),async (req, res) =>
         },
       });
   
-    let response = await teacher.getCourses();
-  
+    let response = await teacher.getCourses();  
     let allCourses = response.map((element) => {
     
-      return element.teacher_course.dataValues.courseId;
+      return element.dataValues.courseName;
     });
     
-    res.send(`${teacher.firstName} has: ${allCourses}`);
+    res.send(`${teacher.firstName} has the following courses: ${allCourses}`);
   });
   
 

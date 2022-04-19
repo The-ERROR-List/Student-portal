@@ -57,15 +57,23 @@ let removedCourse = await courseModel.destroy({where : {id: removedId}})
 res.status(204).json({"course was deleted successfully": removedCourse});
 }
 
+// for admin to see all the teachers that teach a specific course
+router.get('/all-teachers-for-course/:courseId',bearer,async(req, res)=>{
 
-router.get('/allcourses-with-their-teachers',bearer,async(req, res)=>{
-    let courses = await courseModel.findAll({
-        include : [teacherModel] // all the teachers that teach this course
+    let course = await courseModel.findOne({
+        where : {id : req.params.courseId} // find the course all the teachers that teach this course
     });
-    console.log(courses);
-    res.status(200).json({
-        courses: courses
-    });
+ 
+    let response = await course.getTeachers();
+
+   let allTeachers= response.map(teacher => {
+
+    return `${teacher.dataValues.firstName} ${teacher.dataValues.lastName}`
+
+    })
+
+    res.send(`the teachers that teach ${course.courseName} are: ${allTeachers}`)
+
 })
 
 router.get('/allcourses-and-their-classes',bearer,async(req, res)=>{
