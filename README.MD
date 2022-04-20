@@ -40,66 +40,16 @@
 
 * As an admin, I want to see all the courses and their classes and who they are taught by
 
-* As an admin I want to add students to a specific class
+* As an admin, I want to add students to a specific class
 
-* As an admin I want to assign teachers to classes
+* As an admin, I want to assign teachers to classes
 
 
 ### Endpoints documentation
+[API routes documentation](https://app.swaggerhub.com/apis/islam-Attar/APIs/0.1#/)
 
-    post("/signup/admin")
-    Request:
-    {
-    "userName": "admin",
-    "email": "admin@gmail.com",
-    "password": "12345678",
-    "role": "admin"
-    }
-    Response: application/json
+![APIs](./assets/APIs.png)
 
-    post("/signup/std-teacher")
-    Request:
-    {
-        "userName": "student",
-    "email": "student@gmail.com",
-    "password": "12345678",
-    "role": "student",
-    "firstName": "student",
-    "lastName": "student",
-    "gender": "male",
-    "nationality": "ionality",
-    "major": "it"
-    }
-    Response: application/json
-
-    post("/courses")
-    Request:
-    {
-    "courseName": "javascript",
-    "courseGrade": "100",
-    }
-    Response: application/json
-
-    post("/classes")
-    Request:
-    {
-    "className": "section1",
-    "teacherId": "1",
-    "courseId": "1",
-    }
-    Response: application/json
-    post("/add-students-toClass/:id")
-    Request:
-    {
-    "chosenStudent": "student"
-    }
-    Response: application/json
-    post("/add-course-toTeacher/:id")
-    Request:
-    {
-    "chosenCourse": "javascript"
-    }
-    Response: application/json
 
 
 
