@@ -8,6 +8,4 @@ These are the stories for our approved project [Stories](https://trello.com/invi
 [Software Requirements](requirements.md)
 
 ## Database Schema Diagram
-it might look simple but it took us 2 hours :)
-
 ![Database ER Diagram](../assets/Database%20ER%20diagram.png)
