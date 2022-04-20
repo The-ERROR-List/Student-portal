@@ -13,7 +13,7 @@ const teacher = require('./routes/teacher.route');
 const profile = require('./routes/profile.route');
 // const signout = require('./routes/signout.route');
 const zoom = require('./routes/zoom.route');
-const include = require('./routes/include.route');
+const include = require('./routes/include');
 
 const express = require('express');
 const req = require('express/lib/request');
