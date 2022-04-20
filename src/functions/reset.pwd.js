@@ -16,7 +16,7 @@ module.exports = (email) => {
 
   let htmltext = `
 <p>Did you forget your  password ?<br>
-  <a href="http://localhost:3000/reset-password/newpassword">Click here to reset your password</a>
+  <a href="https://stu-portal-prod-app.herokuapp.com/newpassword">Click here to reset your password</a>
 </p>`;
 
   let options = {
