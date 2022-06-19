@@ -10,6 +10,7 @@ const acl = require("../middlewares/acl");
 router.post("/content", bearer, acl("update"), addContent);
 router.get("/content-for-class/:id", bearer, getContent); // classId in params
 router.put('/content/:id',bearer,acl('update'),updateContent); // contentId in params
+
 router.delete("/content/:id", bearer, acl("update"), deleteContent); //contentId in params
 
 async function addContent(req, res) {
@@ -36,6 +37,7 @@ async function updateContent(req, res) {
   console.log(updatedContent);
   res.status(201).send(` ${updatedContent.dataValues.content} -- is your updated content`);
 }
+
 
 async function deleteContent(req, res) {
   let deletedId = req.params.id;

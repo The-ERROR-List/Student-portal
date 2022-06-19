@@ -16,6 +16,8 @@ const zoom = require('./routes/zoom.route');
 const content = require('./routes/content.route');
 
 const include = require('./routes/include');
+const content = require('./routes/content.route');
+
 
 
 const express = require('express');
@@ -38,8 +40,6 @@ app.use(content);
 
 
 app.use(include);
-app.use(include);
-app.use(content);
 
 
 
