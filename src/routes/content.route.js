@@ -9,7 +9,7 @@ const acl = require("../middlewares/acl");
 
 router.post("/content", bearer, acl("update"), addContent);
 router.get("/content-for-class/:id", bearer, getContent); // classId in params
-// router.put('/content/:id',bearer,acl('update'),updateClass);
+router.put('/content/:id',bearer,acl('update'),updateContent); // contentId in params
 router.delete("/content/:id", bearer, acl("update"), deleteContent); //contentId in params
 
 async function addContent(req, res) {
@@ -28,13 +28,14 @@ async function getContent(req, res) {
   res.status(200).json(contents);
 }
 
-// async function updateContent(req, res) {
-//   let body = req.body;
-//   let id = req.params.id;
-//   const classes = classModel.findOne({ where: { id: id } });
-//   const updatedClass = await classModel.update(body);
-//   res.status(201).send(`class ${updatedClass} was updated successfully`);
-// }
+async function updateContent(req, res) {
+  let body = req.body; // send content ONLY
+  let id = req.params.id;
+  let content = await contentModel.findOne({ where: { id: id } });
+  const updatedContent = await content.update(body);
+  console.log(updatedContent);
+  res.status(201).send(` ${updatedContent.dataValues.content} -- is your updated content`);
+}
 
 async function deleteContent(req, res) {
   let deletedId = req.params.id;

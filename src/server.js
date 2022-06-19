@@ -17,6 +17,7 @@ const content = require('./routes/content.route');
 
 const include = require('./routes/include');
 
+
 const express = require('express');
 const req = require('express/lib/request');
 const app = express();
@@ -37,6 +38,10 @@ app.use(content);
 
 
 app.use(include);
+app.use(include);
+app.use(content);
+
+
 
 app.get('/', (req, res) => {
     res.status(200).send('Home Route!');
