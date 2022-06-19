@@ -15,6 +15,7 @@ const profile = require('./routes/profile.route');
 const zoom = require('./routes/zoom.route');
 const content = require('./routes/content.route');
 
+const include = require('./routes/include');
 
 const express = require('express');
 const req = require('express/lib/request');
@@ -35,6 +36,7 @@ app.use(zoom);
 app.use(content);
 
 
+app.use(include);
 
 app.get('/', (req, res) => {
     res.status(200).send('Home Route!');
