@@ -13,8 +13,11 @@ const teacher = require('./routes/teacher.route');
 const profile = require('./routes/profile.route');
 // const signout = require('./routes/signout.route');
 const zoom = require('./routes/zoom.route');
+const content = require('./routes/content.route');
+
 const include = require('./routes/include');
 const content = require('./routes/content.route');
+
 
 
 const express = require('express');
@@ -33,8 +36,10 @@ app.use(courseRoute);
 app.use(classRoute);
 app.use(profile);
 app.use(zoom);
-app.use(include);
 app.use(content);
+
+
+app.use(include);
 
 
 
