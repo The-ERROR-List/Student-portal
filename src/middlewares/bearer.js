@@ -27,7 +27,7 @@ const bearerAuth = async (req, res, next) => {
       res.status(401).send("Unauthorized Token");
     }
   } else {
-    res.status(404).send("Empty Token");
+    res.status(403).send("Empty Token");
   }
 };
 
