@@ -26,7 +26,7 @@ router.post("/signup/admin", async (req, res) => {
     res.status(201).json ({"added admin succesfully with the following info": newUser})
   }
 
-  sendmail(userName, userName, password, email);
+  // sendmail(userName, userName, password, email);
 
 });
 
@@ -57,7 +57,7 @@ router.post("/signup/std-teacher",bearer,acl('delete'), async (req, res) => {
       nationality: nationality,
       major: major,
     });
-    sendmail(firstName, userName, password, email);
+    // sendmail(firstName, userName, password, email);
     res.status(201).json({
       "added student succesfully with the following info": newStudent,
     });
@@ -72,7 +72,7 @@ router.post("/signup/std-teacher",bearer,acl('delete'), async (req, res) => {
       nationality: nationality,
       department: department,
     });
-    sendmail(firstName, userName, password, email);
+    // sendmail(firstName, userName, password, email);
 
     res.status(201).json({
       "added teacher succesfully with the following info": newTeacher,
