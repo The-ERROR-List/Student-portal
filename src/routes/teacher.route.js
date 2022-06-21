@@ -18,6 +18,7 @@ router.get('/allteachers',bearer,async(req,res)=>{
 
 
 
+
 router.get('/teacher/:id',bearer,async (req, res) => {
     let teacher = await teacherModel.findOne({
         where: {
