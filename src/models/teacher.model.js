@@ -29,7 +29,12 @@ const Teacher = (sequelize, DataTypes) => sequelize.define('teacher', {
     department: {
         type: DataTypes.STRING,
         allowNull: false,
-    }
+    },
+    userName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+    },
 
 })
 

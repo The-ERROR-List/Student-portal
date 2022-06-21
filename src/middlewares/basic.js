@@ -4,6 +4,7 @@ const base64 = require('base-64');
 const jwt = require('jsonwebtoken');
 const SECRET = process.env.SECRET || "something";
 const { userModel } = require('../models/index');
+const {teacherModel} = require('../models/index')
 const bcrypt = require('bcrypt');
 
 

@@ -14,11 +14,6 @@ router.get('/allteachers',bearer,async(req,res)=>{
         teachers: teachers
     });
 })
-
-
-
-
-
 router.get('/teacher/:id',bearer,async (req, res) => {
     let teacher = await teacherModel.findOne({
         where: {
@@ -89,10 +84,14 @@ router.post("/add-course-toTeacher/:id",bearer,acl('delete'),async (req, res) =>
           id: req.params.id,
         },
       });
-  
-    let response = await teacher.getCourses();  
-    let allCourses = response.map((element) => {
-    
+      // let teacherCourses = await Teacher.crate({ name: 'the-teacher' })
+    let courses = await teacher.getCourses(); 
+    console.log('1111',await teacher.countCourses()); 
+    // console.log('1111',await teacher.hasCourses()); 
+
+
+    let allCourses = courses.map(element => {
+      console.log(element.dataValues.courseName);
       return element.dataValues.courseName;
     });
     

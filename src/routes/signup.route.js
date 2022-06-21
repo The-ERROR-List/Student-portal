@@ -56,6 +56,8 @@ router.post("/signup/std-teacher",bearer,acl('delete'), async (req, res) => {
       gender: gender,
       nationality: nationality,
       major: major,
+      userName: newUser.userName,
+
     });
     // sendmail(firstName, userName, password, email);
     res.status(201).json({
@@ -71,6 +73,7 @@ router.post("/signup/std-teacher",bearer,acl('delete'), async (req, res) => {
       gender: gender,
       nationality: nationality,
       department: department,
+      userName: newUser.userName,
     });
     // sendmail(firstName, userName, password, email);
 

@@ -31,7 +31,12 @@
     major : {
         type : DataTypes.STRING,
         allowNull : false,
-    }
+    },
+    userName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+    },
   
  })
 

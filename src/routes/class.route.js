@@ -1,5 +1,4 @@
 "use strict";
-
 const express = require("express");
 const { classModel, courseModel, studentModel } = require("../models/index");
 const router = express.Router();
@@ -12,7 +11,6 @@ router.post('/classes',bearer,acl('delete'),addClass);
 router.get('/classes/:id',bearer,getOneClass);
 router.put('/classes/:id',bearer,acl('update'),updateClass);
 router.delete('/classes/:id',bearer,acl('delete'),deleteClass);
-
 
 async function getAllClasses(req, res) {
   let classes = await classModel.findAll();
@@ -67,8 +65,6 @@ router.post("/add-students-toClass/:id",bearer,acl('delete'), async (req, res) =
       `student ${toAddStudent.firstName} added successfully in ${currentClass.className}`
     );
 });
-
-
 // this will get me all the students in a specific class
 router.get("/get-allStudents-inClass/:id", async (req, res) => {
 
