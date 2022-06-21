@@ -57,6 +57,7 @@ ContentModel.belongsTo(ClassModel); // class can exist without content but conte
 
 
 
+
 module.exports = {
     db: sequelize,
     studentModel: StudentModel,
