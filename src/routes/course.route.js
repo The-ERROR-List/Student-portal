@@ -68,11 +68,13 @@ router.get('/all-teachers-for-course/:courseId',bearer,async(req, res)=>{
 
    let allTeachers= response.map(teacher => {
 
-    return `${teacher.dataValues.firstName} ${teacher.dataValues.lastName}`
+    return {
+        "TeacherName":`${teacher.dataValues.firstName} ${teacher.dataValues.lastName}`
+    } 
 
     })
 
-    res.send(`the teachers that teach ${course.courseName} are: ${allTeachers}`)
+    res.json({"courseName":course.courseName, TeacherName:allTeachers })
 
 })
 
