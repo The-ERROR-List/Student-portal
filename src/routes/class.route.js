@@ -1,6 +1,6 @@
 "use strict";
 const express = require("express");
-const { classModel, courseModel, studentModel, teacherModel } = require("../models/index");
+const { classModel, courseModel, studentModel, teacherModel,student_classModel } = require("../models/index");
 const router = express.Router();
 
 const bearer = require('../middlewares/bearer');
@@ -56,25 +56,28 @@ async function deleteClass(req, res) {
 
 // for admin to add students, 
 // but please don't add a student if they already joined the class using their route /choose-class/:id
-router.post("/add-students-toClass/:id",bearer,acl('delete'), async (req, res) => {
-  // let body = {className,userName,stuedntGrade}
+router.post("/add-students-toClass",bearer,acl('delete'), async (req, res) => {
+  const  {className,userName,studentGrade} = req.body;
   let currentClass = await classModel.findOne({
     where: {
-      id: req.params.id,
+      className: className,
     },
   });
 
   let toAddStudent = await studentModel.findOne({
     where: {
-      id: req.body.chosenStudent
+      userName: userName,
     },
   });
 
-  await currentClass.addStudent(toAddStudent); // this is a special method in belongstomany
+  await currentClass.addStudent(toAddStudent,{through:{studentGrade:studentGrade}}); // this is a special method in belongstomany
+  console.log('1111111111',toAddStudent)
   res
     .status(201)
-    .send(
-      `student ${toAddStudent.firstName} added successfully in ${currentClass.className}`
+    .json({
+      "Message":`student ${toAddStudent.firstName} added to class ${currentClass.className}`,
+      "studentName": toAddStudent.firstName ,"className":currentClass.className ,"studentGrade":studentGrade
+    }
     );
 });
 // this will get me all the students in a specific class

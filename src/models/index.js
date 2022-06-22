@@ -9,6 +9,7 @@ const courseModel = require('./course.model');
 const classModel = require('./class.model');
 const userModel = require('./user.model');
 const contentModel = require('./content.model');
+const student_classModel=require('./student_class.model')
 
 
 const DATABASE_URL = process.env.NODE_ENV === 'test' ? 'sqlite:memory:' : process.env.DATABASE_URL; // npm i sqlite3
@@ -30,6 +31,7 @@ let TeacherModel = teacherModel(sequelize, DataTypes);
 let CourseModel = courseModel(sequelize, DataTypes);
 let ClassModel = classModel(sequelize, DataTypes);
 let ContentModel = contentModel(sequelize, DataTypes);
+let Student_classModel =student_classModel(sequelize,DataTypes)
 
 // relations between tables
 
@@ -65,6 +67,7 @@ module.exports = {
     courseModel: CourseModel,
     classModel: ClassModel,
     userModel: UserModel,
-    contentModel: ContentModel
+    contentModel: ContentModel,
+    student_classModel : Student_classModel,
 
 };
