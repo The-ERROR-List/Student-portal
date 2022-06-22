@@ -57,6 +57,7 @@ async function deleteClass(req, res) {
 // for admin to add students, 
 // but please don't add a student if they already joined the class using their route /choose-class/:id
 router.post("/add-students-toClass/:id",bearer,acl('delete'), async (req, res) => {
+  // let body = {className,userName,stuedntGrade}
   let currentClass = await classModel.findOne({
     where: {
       id: req.params.id,
@@ -65,7 +66,7 @@ router.post("/add-students-toClass/:id",bearer,acl('delete'), async (req, res) =
 
   let toAddStudent = await studentModel.findOne({
     where: {
-      id: req.body.chosenStudent,
+      id: req.body.chosenStudent
     },
   });
 
@@ -84,9 +85,7 @@ router.get("/get-allStudents-inClass/:id", async (req, res) => {
       id: req.params.id,
     },
   });
-
   let myresponse = await currentClass.getStudents();
-  
   let allStudents = myresponse.map((ele) => {
     return `${ele.dataValues.firstName} ${ele.dataValues.lastName}`
   }); // print all students
