@@ -18,13 +18,17 @@ async function getAllClasses(req, res) {
 }
 
 async function addClass(req, res) {
-  let {className,courseName,userName} = req.body;
+  let {className,courseName,userName,classTime} = req.body;
   let teacher = await teacherModel.findOne({where : {userName : userName}})
   let course = await courseModel.findOne({where :{courseName : courseName}})
   let addedClass = await classModel.create({
     className ,
     teacherId : teacher.id,
     courseId : course.id,
+    teacherName:`${teacher.firstName} ${teacher.lastName}`,
+    courseName : course.courseName,
+    classTime : classTime
+
   });
  
   res.status(201).json({ "new class was added succesfully": addedClass }); // you have to send courseId and teacherId in req.body

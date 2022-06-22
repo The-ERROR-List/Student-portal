@@ -9,9 +9,19 @@
         type: DataTypes.STRING,
         allowNull: false,
 
+    }, 
+    teacherName:{
+        type:DataTypes.STRING,
+        allowNull : false,
+    },
+    courseName:{
+        type : DataTypes.STRING,
+        allowNull:false,
+    },
+    classTime:{
+        type : DataTypes.STRING,
+        allowNull : false,
     }
-
-    
 
  })
  
