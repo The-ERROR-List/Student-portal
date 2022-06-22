@@ -14,7 +14,15 @@ const Course = (sequelize, DataTypes) => sequelize.define('course', {
     courseGrade: {
         type: DataTypes.INTEGER,
         allowNull: false, 
+    },
+    courseDescription:{
+        type: DataTypes.STRING,
+        allowNull : true,
+    },
+    courseImg:{
+        type:DataTypes.STRING,
     }
+
  })
 
 module.exports = Course;
