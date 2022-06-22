@@ -73,14 +73,15 @@ router.post("/add-course-toTeacher", bearer, acl('delete'), async (req, res) => 
   res
     .status(201)
     .json({
-      "Message":`Course ${addCourses.courseName} added to Teacher ${teacher.firstName}`,
+      "Message": `Course ${addCourses.courseName} added to Teacher ${teacher.firstName}`,
 
-        "Teacher" : teacher.firstName , "id" : teacher.id ,"courseName" : addCourses.courseName,
-  });
-  });
+      "Teacher": teacher.firstName, "id": teacher.id, "courseName": addCourses.courseName, "Course description": addCourses.courseDescription
+    });
+});
 
 //for teachers to see all their courses
 router.get("/get-allCourses-for-teacher/:id", async (req, res) => {
+
   let teacher = await teacherModel.findOne({
     where: {
       id: req.params.id,
@@ -94,10 +95,17 @@ router.get("/get-allCourses-for-teacher/:id", async (req, res) => {
 
   let allCourses = courses.map(element => {
     console.log(element.dataValues.courseName);
-    return element.dataValues.courseName;
+    return {
+      "course Name": element.dataValues.courseName,
+      "course Description": element.dataValues.courseDescription,
+      "course Image": element.dataValues.courseImg
+    };
   });
-
-  res.send(`${teacher.firstName} has the following courses: ${allCourses}`);
+console.log(allCourses)
+  res.json({
+    "TeacherName": `${teacher.firstName} ${teacher.lastName}`,
+    "TeacherCourses": allCourses,
+  });
 });
 
 
