@@ -1,6 +1,6 @@
 "use strict";
 const express = require("express");
-const { classModel, courseModel, studentModel } = require("../models/index");
+const { classModel, courseModel, studentModel, teacherModel } = require("../models/index");
 const router = express.Router();
 
 const bearer = require('../middlewares/bearer');
@@ -18,8 +18,15 @@ async function getAllClasses(req, res) {
 }
 
 async function addClass(req, res) {
-  let body = req.body;
-  let addedClass = await classModel.create(body);
+  let {className,courseName,userName} = req.body;
+  let teacher = await teacherModel.findOne({where : {userName : userName}})
+  let course = await courseModel.findOne({where :{courseName : courseName}})
+  let addedClass = await classModel.create({
+    className ,
+    teacherId : teacher.id,
+    courseId : course.id,
+  });
+ 
   res.status(201).json({ "new class was added succesfully": addedClass }); // you have to send courseId and teacherId in req.body
 } // to create the class inside a specific course
 
