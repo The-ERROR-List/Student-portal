@@ -97,7 +97,7 @@ router.get("/get-allStudents-inClass/:id", async (req, res) => {
   
   res.json({
    "className": currentClass.className,
-  "students": allStudents
+   "students": allStudents
 });
 });
 
