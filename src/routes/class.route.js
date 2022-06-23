@@ -91,10 +91,12 @@ router.get("/get-allStudents-inClass/:id", async (req, res) => {
   let myresponse = await currentClass.getStudents();
   let allStudents = myresponse.map((ele) => {
     return {
-      "studentName":`${ele.dataValues.firstName} ${ele.dataValues.lastName}`
+      "studentName":`${ele.dataValues.firstName} ${ele.dataValues.lastName}`,
+      "studentGrade":ele.dataValues.student_class.studentGrade,
   }
   }); // print all students
-  
+  console.log(allStudents)
+  console.log(myresponse)
   res.json({
    "className": currentClass.className,
    "students": allStudents
