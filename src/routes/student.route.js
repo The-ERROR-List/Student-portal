@@ -81,7 +81,7 @@ router.get("/get-classes-for-student/:id", bearer, async (req, res) => {
   let response = await currentStudent.getClasses();
 
   let allClasses = response.map((element) => {
-    return { "className": element.dataValues.className }
+    return { "className": element.dataValues.className ,"classId":element.dataValues.id}
   });
   // get all classes the student has
   res.json({
