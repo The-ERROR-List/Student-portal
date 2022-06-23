@@ -71,7 +71,7 @@ router.post("/choose-class/:id", bearer, acl("delete"), async (req, res) => {
 });
 
 // for students to get all the classes they have
-router.get("/get-classes-for-student/:id", bearer, acl("delete"), async (req, res) => {
+router.get("/get-classes-for-student/:id", bearer, async (req, res) => {
   let currentStudent = await studentModel.findOne({
     where: {
       id: req.params.id,
