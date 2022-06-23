@@ -108,8 +108,7 @@ router.get("/get-allCourses-for-teacher/:id", async (req, res) => {
   });
 });
 
-router.get(
-  "/get-all-classes-for-course-for-teacher/:courseId/:teacherId",
+router.get("/get-all-classes-for-course-for-teacher/:courseId/:teacherId",
   async (req, res) => {
     let classes = await classModel.findAll({
       where: {
@@ -117,6 +116,7 @@ router.get(
         teacherId: req.params.teacherId,
       },
     });
+    console.log(classes)
     res.json({
       classes,
     });
