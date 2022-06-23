@@ -71,21 +71,24 @@ router.post("/choose-class/:id", bearer, acl("delete"), async (req, res) => {
 });
 
 // for students to get all the classes they have
-router.get("/get-classes-for-student/:id",bearer,acl("delete"), async (req, res) => {
-    let currentStudent = await studentModel.findOne({
-      where: {
-        id: req.params.id,
-      },
-    });
+router.get("/get-classes-for-student/:id", bearer, acl("delete"), async (req, res) => {
+  let currentStudent = await studentModel.findOne({
+    where: {
+      id: req.params.id,
+    },
+  });
 
-    let response = await currentStudent.getClasses();
+  let response = await currentStudent.getClasses();
 
-    let allClasses = response.map((element) => {
-      return element.dataValues.className;
-    });
-    // get all classes the student has
-    res.send(`${currentStudent.firstName} has ${allClasses}`);
-  }
+  let allClasses = response.map((element) => {
+    return { "className": element.dataValues.className }
+  });
+  // get all classes the student has
+  res.json({
+    "studentName": `${currentStudent.firstName}  ${currentStudent.lastName}`,
+    "classes": allClasses
+  });
+}
 );
 
 module.exports = router;
