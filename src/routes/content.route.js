@@ -7,15 +7,22 @@ const router = express.Router();
 const bearer = require("../middlewares/bearer");
 const acl = require("../middlewares/acl");
 
-router.post("/content", bearer, acl("update"), addContent);
+router.post("/content/:id", bearer, acl("update"), addContent);
 router.get("/content-for-class/:id", bearer, getContent); // classId in params
-router.put('/content/:id',bearer,acl('update'),updateContent); // contentId in params
+router.put('/content/:id', bearer, acl('update'), updateContent); // contentId in params
 
 router.delete("/content/:id", bearer, acl("update"), deleteContent); //contentId in params
 
 async function addContent(req, res) {
-  let body = req.body; //classId, content
-  let addedContent = await contentModel.create(body);
+  let { contentTitle, contentBody, contentLink, contentCategory } = req.body; //classId, content
+
+  let addedContent = await contentModel.create({
+    contentTitle: contentTitle,
+    contentBody: contentBody,
+    contentLink: contentLink,
+    contentCategory: contentCategory,
+    classId : req.params.id
+  });
   res
     .status(201)
     .json({ "new content was posted to class succesfully": addedContent });
@@ -42,7 +49,7 @@ async function updateContent(req, res) {
 async function deleteContent(req, res) {
   let deletedId = req.params.id;
   let deletedContent = await contentModel.destroy({ where: { id: deletedId } }); // returns boolean
-  
+
   deletedContent
     ? res.status(200).send(`content was deleted successfully`)
     : res.status(200).send(`content cannot be deleted`);
