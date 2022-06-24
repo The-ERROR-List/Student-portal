@@ -9,7 +9,7 @@ const acl = require("../middlewares/acl");
 
 router.post("/content/:id", bearer, acl("update"), addContent);
 router.get("/content-for-class/:id", bearer, getContent); // classId in params
-router.put('/content/:id', bearer, acl('update'), updateContent); // contentId in params
+router.patch('/content/:id', bearer, acl('update'), updateContent); // contentId in params
 
 router.delete("/content/:id", bearer, acl("update"), deleteContent); //contentId in params
 
@@ -25,7 +25,7 @@ async function addContent(req, res) {
   });
   res
     .status(201)
-    .json({ "new content was posted to class succesfully": addedContent });
+    .json({ "Content": addedContent });
   // you have to send classId in req.body
 } // you need to have a class first
 
@@ -37,12 +37,17 @@ async function getContent(req, res) {
 }
 
 async function updateContent(req, res) {
-  let body = req.body; // send content ONLY
+  let {contentTitle,contentBody,contentLink} = req.body; // send content ONLY
   let id = req.params.id;
   let content = await contentModel.findOne({ where: { id: id } });
-  const updatedContent = await content.update(body);
+  const updatedContent = await content.update({
+    id:content.id,
+    contentTitle:contentTitle,
+    contentBody:contentBody,
+    contentLink:contentLink,
+  });
   console.log(updatedContent);
-  res.status(201).send(` ${updatedContent.dataValues.content} -- is your updated content`);
+  res.status(201).json({"content":updatedContent.dataValues});
 }
 
 
