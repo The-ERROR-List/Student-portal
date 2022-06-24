@@ -5,14 +5,21 @@
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
     },
-    content :{
+    contentTitle :{
         type: DataTypes.STRING,
-        allowNull: false,
 
+    },
+    contentBody:{
+        type:DataTypes.STRING,
+    },
+    contentLink:{
+        type : DataTypes.STRING,        
+
+    },
+    contentCategory:{
+        type:DataTypes.ENUM('announcement','content'),
+        defaultValue: 'content',
     }
-
-    
-
  })
  
 module.exports = Content;
