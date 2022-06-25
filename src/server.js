@@ -76,28 +76,23 @@ socketMessages.on('connection', (socket) => { // socket is sent when react clien
     console.log('socket client connected', socket.id);
 
 
+    socket.on("join_room", (data) => {
+        socket.join(data); // data is room
+        console.log(`User with ID: ${socket.id} joined room: ${data}`);
+      });
+
+    socket.on('send_message', (data) => {
+        // console.log(data)
+        // if (room === '') {
+        //     socket.broadcast.emit('recieved-message',message,user); if the room wasn't specified
+    
+        socket.to(data.room).emit('receive_message', data);
+       
+    })
+
     socket.on ('disconnect', ()=>{
         console.log('user disconnected', socket.id);
     })
-
-    socket.on('send-message', (message,user,room) => {
-        if (room === '') {
-            socket.broadcast.emit('recieved-message',message,user);
-    
-        }else{
-            socket.to(room).emit('recieved-message',message,user);
-        }
-    })
-    
-    socket.on('join-user',(user,joinedMessageCb) =>{
-            socket.join(user);
-            joinedMessageCb(`Joined ${user}`);
-    })
-    socket.on('join',(room,joinedMessageCb)=>{
-        socket.join(room)
-        joinedMessageCb(`Joined ${room} room`)
-    })
-
 });
 
 
