@@ -40,7 +40,7 @@ router.get("/createMeeting",bearer,acl('update'), (req, res) => {
   rp(options)
     .then(function (response) {
       console.log("response is: ", response);
-      res.send("create meeting result: " + JSON.stringify(response));
+      res.json({"Meeting" : response});
       // console.log(response);
     })
     .catch(function (err) {
