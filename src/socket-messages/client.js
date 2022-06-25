@@ -1,6 +1,6 @@
 'use strict';
 
-const socket = io('http://localhost:3000/socketMessages');
+// const socket = io('http://localhost:3000/socketMessages');
 
 
 const joinRoomButton = document.getElementById("room-button");
