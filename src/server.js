@@ -22,7 +22,11 @@ const include = require('./routes/include');
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);
-const io = require('socket.io')(http);
+const io = require('socket.io')(http, {
+    cors: {
+      origin: ["http://localhost:3001/"] // the client port in react
+    },
+  });
 
 app.use(express.json());
 app.use(cors());
@@ -56,15 +60,26 @@ function onConnection(socket) {
 app.get("/whiteboard", (req, res) => {
     res.sendFile(__dirname + '/whiteboard/index.html');
 })
-app.get('/socketMessages', (req, res) => {
-    res.sendFile(__dirname + '/socket-messages/index.html');
-});
+// app.get('/socketMessages', (req, res) => {
+//     res.sendFile(__dirname + '/socket-messages/index.html');
+// }); we used to use this to serve the client frontend on the express server
 
 const whiteBoard = io.of('/whiteboard');
 whiteBoard.on('connection', onConnection);
 
-const socketMessages = io.of('/socketMessages');
-socketMessages.on('connect', (socket) => {
+
+//----------------- 
+
+const socketMessages = io.of('/socketMessages'); //namespace
+
+socketMessages.on('connection', (socket) => { // socket is sent when react client connects
+    console.log('socket client connected', socket.id);
+
+
+    socket.on ('disconnect', ()=>{
+        console.log('user disconnected', socket.id);
+    })
+
     socket.on('send-message', (message,user,room) => {
         if (room === '') {
             socket.broadcast.emit('recieved-message',message,user);
