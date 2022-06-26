@@ -32,6 +32,10 @@ router.put("/teacher/:id", bearer, acl("delete"), async (req, res) => {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     courseId: req.body.courseId,
+    gender : req.body.gender,
+    nationality : req.body.nationality,
+    department:req.body.department,
+    userName : req.body.userName
   });
   res.status(200).json({
     "updated teacher succesfully with the following info": updatedTeacher,
