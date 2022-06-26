@@ -43,8 +43,8 @@ async function getOneClass(req, res) {
 async function updateClass(req, res) {
   let {className,courseName,userName,classTime} = req.body;
   let id = req.params.id;
-  const classes = classModel.findOne({ where: { id: id } });
-  const updatedClass = await classModel.update({
+  const classes = await classModel.findOne({ where: { id: id } });
+  const updatedClass = await classes.update({
     className : className,
     courseName : courseName,
     userName : userName,
