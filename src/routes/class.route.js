@@ -35,7 +35,7 @@ async function addClass(req, res) {
 } // to create the class inside a specific course
 
 async function getOneClass(req, res) {
-  let classId = parseInt(req.params.id);
+  let classId = req.params.id;
   let classes = await classModel.findOne({ where: { id: classId } });
   res.status(200).json(classes);
 }
