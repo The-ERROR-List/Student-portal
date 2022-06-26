@@ -41,11 +41,16 @@ async function getOneClass(req, res) {
 }
 
 async function updateClass(req, res) {
-  let body = req.body;
+  let {className,courseName,userName,classTime} = req.body;
   let id = req.params.id;
   const classes = classModel.findOne({ where: { id: id } });
-  const updatedClass = await classModel.update(body);
-  res.status(201).send(`class ${updatedClass} was updated successfully`);
+  const updatedClass = await classModel.update({
+    className : className,
+    courseName : courseName,
+    userName : userName,
+    classTime : classTime
+  });
+  res.status(201).json({"class": updatedClass});
 }
 
 async function deleteClass(req, res) {
