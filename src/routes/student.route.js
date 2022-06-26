@@ -32,6 +32,10 @@ router.put("/student/:id", bearer, acl("update"), async (req, res) => {
   let updatedStudent = await student.update({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
+    gender : req.body.gender,
+    nationality : req.body.nationality,
+    major:req.body.major,
+    userName : req.body.userName
   });
   res.status(200).json({
     "updated student succesfully with the following info": updatedStudent,
