@@ -23,7 +23,6 @@ async function addContent(req, res) {
     contentTitle: contentTitle,
     contentBody: contentBody,
     contentLink: contentLink,
-    contentCategory: contentCategory,
     classId : req.params.id
   });
   res
