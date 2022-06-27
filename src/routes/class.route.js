@@ -108,4 +108,23 @@ router.get("/get-allStudents-inClass/:id", async (req, res) => {
 });
 });
 
+router.patch("/edit-grade-for-student-in-class/:id", async (req, res) => { //classId - studentId
+
+  const {grade} = req.body
+
+  let record = await student_classModel.findOne({
+    where: {
+      // classId: req.params.id,
+      studentId : req.params
+    },
+  });
+
+  let updated = await record.update(grade);
+
+
+  res.json({
+   updated
+});
+});
+
 module.exports = router;
