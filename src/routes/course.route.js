@@ -38,16 +38,23 @@ async function getAllcourses(req,res){
 
 
 async function getOneCourse(req, res){
-    let courseId = parseInt(req.params.id);
+    let courseId = req.params.id;
     let courses = await courseModel.findOne({where :{id: courseId}});
     res.status(200).json(courses);
 }
 
 async function updateCourse(req, res){
-let body = req.body;
+let {
+    courseName,courseGrade,courseDescription,courseImg
+} = req.body;
 let id = req.params.id;
-const courses = courseModel.findOne({where :{id: id}});
-const updatedCourse = await courseModel.update(body);
+const courses = await courseModel.findOne({where :{id: id}});
+const updatedCourse = await courses.update({
+    courseName:courseName,
+    courseGrade:courseGrade,
+    courseDescription:courseDescription,
+    courseImg:courseImg,
+});
 res.status(201).send({"course was updated successfully": updatedCourse});
 }
 

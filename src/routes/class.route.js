@@ -35,17 +35,22 @@ async function addClass(req, res) {
 } // to create the class inside a specific course
 
 async function getOneClass(req, res) {
-  let classId = parseInt(req.params.id);
+  let classId = req.params.id;
   let classes = await classModel.findOne({ where: { id: classId } });
   res.status(200).json(classes);
 }
 
 async function updateClass(req, res) {
-  let body = req.body;
+  let {className,courseName,userName,classTime} = req.body;
   let id = req.params.id;
-  const classes = classModel.findOne({ where: { id: id } });
-  const updatedClass = await classModel.update(body);
-  res.status(201).send(`class ${updatedClass} was updated successfully`);
+  const classes = await classModel.findOne({ where: { id: id } });
+  const updatedClass = await classes.update({
+    className : className,
+    courseName : courseName,
+    userName : userName,
+    classTime : classTime
+  });
+  res.status(201).json({"class": updatedClass});
 }
 
 async function deleteClass(req, res) {
