@@ -16,10 +16,7 @@
         type : DataTypes.STRING,        
 
     },
-    contentCategory:{
-        type:DataTypes.ENUM('announcement','content'),
-        defaultValue: 'content',
-    }
+  
  })
  
 module.exports = Content;
