@@ -21,6 +21,9 @@
     classTime:{
         type : DataTypes.STRING,
         allowNull : false,
+    },
+    classImage:{
+        type : DataTypes.STRING,
     }
 
  })

@@ -111,16 +111,21 @@ router.get("/get-allStudents-inClass/:id", async (req, res) => {
 
 router.patch("/edit-grade-for-student-in-class/:id", async (req, res) => { //classId - studentId
 
-  const {grade} = req.body
+  const {studentGrade} = req.body
 
   let record = await student_classModel.findOne({
     where: {
       // classId: req.params.id,
-      studentId : req.params
+      studentId : req.params.id
     },
   });
+  console.log(111111111111111111111111,record.dataValues.studentGrade)
+  record.dataValues.studentGrade=studentGrade
+  console.log(222222222222222222222222222,record.dataValues.studentGrade)
 
-  let updated = await record.update(grade);
+  let updated = await record.update({
+    studentGrade:studentGrade
+  });
 
 
   res.json({
