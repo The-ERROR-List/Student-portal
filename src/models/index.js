@@ -10,6 +10,7 @@ const classModel = require('./class.model');
 const userModel = require('./user.model');
 const contentModel = require('./content.model');
 const student_classModel=require('./student_class.model')
+const announcementModel = require('./announcement.meodel')
 
 
 const DATABASE_URL = process.env.NODE_ENV === 'test' ? 'sqlite:memory:' : process.env.DATABASE_URL; // npm i sqlite3
@@ -32,6 +33,7 @@ let CourseModel = courseModel(sequelize, DataTypes);
 let ClassModel = classModel(sequelize, DataTypes);
 let ContentModel = contentModel(sequelize, DataTypes);
 let Student_classModel =student_classModel(sequelize,DataTypes)
+let AnnouncementModel = announcementModel(sequelize,DataTypes)
 
 // relations between tables
 
@@ -57,6 +59,8 @@ ClassModel.belongsToMany(StudentModel, { through: 'student_class' })
 ClassModel.hasMany(ContentModel);
 ContentModel.belongsTo(ClassModel); // class can exist without content but content can't exist without class, therefore content table will have classID as FK
 
+ClassModel.hasMany(AnnouncementModel)
+AnnouncementModel.belongsTo(ClassModel)
 
 
 
@@ -69,5 +73,6 @@ module.exports = {
     userModel: UserModel,
     contentModel: ContentModel,
     student_classModel : Student_classModel,
+    announcementModel : AnnouncementModel,
 
 };

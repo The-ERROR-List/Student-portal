@@ -14,7 +14,7 @@ const profile = require('./routes/profile.route');
 // const signout = require('./routes/signout.route');
 const zoom = require('./routes/zoom.route');
 const content = require('./routes/content.route');
-
+const announcement = require('./routes/announcement.route')
 const include = require('./routes/include');
 
 
@@ -39,6 +39,7 @@ app.use(classRoute);
 app.use(profile);
 app.use(zoom);
 app.use(content);
+app.use(announcement)
 
 
 app.use(include);
