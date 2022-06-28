@@ -12,8 +12,7 @@ const Course = (sequelize, DataTypes) => sequelize.define('course', {
     },
 
     courseGrade: {
-        type: DataTypes.INTEGER,
-        allowNull: false, 
+        type: DataTypes.STRING,
     },
     courseDescription:{
         type: DataTypes.STRING,
