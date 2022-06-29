@@ -44,3 +44,4 @@ const User = (sequelize, DataTypes) => sequelize.define('user', {
 
 });
 module.exports = User;
+
