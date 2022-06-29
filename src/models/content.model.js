@@ -10,7 +10,7 @@
 
     },
     contentBody:{
-        type:DataTypes.STRING,
+        type:DataTypes.STRING(1000),
     },
     contentLink:{
         type : DataTypes.STRING,        

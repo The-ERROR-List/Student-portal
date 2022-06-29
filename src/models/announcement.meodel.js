@@ -10,11 +10,11 @@
 
     },
     announcementBody:{
-        type:DataTypes.STRING,
+        type:DataTypes.STRING(1000),
     },
     announcementLink:{
         type : DataTypes.STRING,        
-
+       
     },
   
  })

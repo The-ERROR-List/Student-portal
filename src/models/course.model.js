@@ -11,16 +11,11 @@ const Course = (sequelize, DataTypes) => sequelize.define('course', {
 
     },
 
-    // courseGrade: {
-    //     type: DataTypes.STRING,
-    // },
     courseDescription:{
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(500),
         allowNull : true,
     },
-    // courseImg:{
-    //     type:DataTypes.STRING,
-    // }
+ 
 
  })
 

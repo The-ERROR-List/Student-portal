@@ -85,7 +85,8 @@ router.post("/add-students-toClass",bearer,acl('delete'), async (req, res) => {
     }
     );
 });
-// this will get me all the students in a specific class
+// this will get me all the students in a specific clas
+
 router.get("/get-allStudents-inClass/:id", async (req, res) => {
 
   let currentClass = await classModel.findOne({
